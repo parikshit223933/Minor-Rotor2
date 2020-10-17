@@ -7,7 +7,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 app.use('/', routes);
-app.use(cors()); // enable all req.
+app.use(cors()); // enable all
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 

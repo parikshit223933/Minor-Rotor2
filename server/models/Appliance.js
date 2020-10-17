@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const appliance_schema = new mongoose.Schema(
 	{
+		admin:{
+			type:mongoose.Schema.Types.ObjectId,
+			ref:'User'
+		},
 		name: {
 			type: String,
 			required: true,

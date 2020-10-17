@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+
+// we will be taking the typical example of bulb and fan
+// for bulb isTurnedOn and intensity are applicable
+// for fan, speed and isTurnedOn are applicable
 const state_schema = new mongoose.Schema(
 	{
 		appliance: {
@@ -13,9 +17,6 @@ const state_schema = new mongoose.Schema(
 		speed: {
 			type: mongoose.Schema.Types.Number,
 		},
-		temperature: {
-			type: mongoose.Schema.Types.Decimal128,
-		},
 		intensity: {
 			type: mongoose.Schema.Types.Number,
 		},
@@ -25,5 +26,5 @@ const state_schema = new mongoose.Schema(
 	}
 );
 
-const state = mongoose.model('State', appliance_schema);
+const state = mongoose.model('State', state_schema);
 module.exports = state;

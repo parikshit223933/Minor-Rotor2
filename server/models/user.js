@@ -12,7 +12,14 @@ const user_schema = new mongoose.Schema(
 		},
 		password: {
 			type: mongoose.Schema.Types.String,
+			required: true,
 		},
+		appliances: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Appliance',
+			},
+		],
 	},
 	{
 		timestamps: true,
