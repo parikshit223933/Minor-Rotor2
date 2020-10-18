@@ -10,3 +10,12 @@ module.exports.internalServerError=(res)=>
     data:{}
   })
 }
+
+module.exports.response=(res, statusCode, success, message, data={})=>
+{
+  return res.status(statusCode).json({
+    success,
+    message,
+    data
+  })
+}

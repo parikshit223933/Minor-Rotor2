@@ -6,6 +6,10 @@ const mongoose = require('mongoose');
 // for fan, speed and isTurnedOn are applicable
 const state_schema = new mongoose.Schema(
 	{
+		admin:{
+			type:mongoose.Schema.Types.ObjectId,
+			ref:'User'
+		},
 		appliance: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'Appliance',

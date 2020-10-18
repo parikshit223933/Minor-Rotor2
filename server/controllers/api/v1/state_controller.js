@@ -1,12 +1,12 @@
 const chalk = require('chalk');
-const {
-	ReasonPhrases,
-	StatusCodes,
-} = require('http-status-codes');
+const { ReasonPhrases, StatusCodes } = require('http-status-codes');
 const helper = require('../../../helpers/helper');
 const appliance = require('../../../constants/appliance');
 const applianceToStateMapping = require('../../../constants/appliance_to_state_mapping');
 const changeCase = require('change-case');
+const State = require('../../../models/State');
+const User = require('../../../models/user');
+const Appliance = require('../../../models/Appliance');
 
 // return all the states for this appliance
 // req.body => { appliance_name }
@@ -45,8 +45,66 @@ module.exports.getStatesForAppliance = (req, res) => {
 
 // change the state of the appliance for the requesting user
 // req.body => {email, appliance_name, new_isTurnedOn_state, new_speed(in case of fan), new_intensity(in case of a bulb)}
-module.exports.changeState = (req, res) => {
-  
+module.exports.changeState = async (req, res) => {
+	const { email, appliance_name, ...new_states } = req.body;
+	if (!email || !appliance_name) {
+		return helper.response(
+			res,
+			StatusCodes.NOT_ACCEPTABLE,
+			false,
+			'No appliance selected!'
+		);
+	}
+	if (!appliance.allAppliances.includes(appliance_name)) {
+		return helper.response(
+			res,
+			StatusCodes.NOT_ACCEPTABLE,
+			false,
+			'Selected appliance is not supported!'
+		);
+	}
+	const all_states_of_selected_appliance =
+		applianceToStateMapping[appliance_name];
+	const are_all_recieved_state_names_correct = Object.keys(new_states).map(
+		(new_state_name) => {
+			return all_states_of_selected_appliance.includes(new_state_name);
+		}
+	);
+	if (are_all_recieved_state_names_correct.includes(false)) {
+		return helper.response(
+			res,
+			StatusCodes.NOT_ACCEPTABLE,
+			false,
+			'One of the state names recieved are in the wrong format'
+		);
+	}
+	// finally we can update the state!
+	try {
+		let user = await User.findOne({ email: email });
+		let appliance = await Appliance.findOne({ name: appliance_name });
+		if (!user || !appliance) {
+			return helper.internalServerError(res);
+		}
+		let state = await State.findOne({
+			admin: user.id,
+			appliance: appliance.id,
+		});
+		if (!state) {
+			return helper.response(
+				res,
+				StatusCodes.BAD_REQUEST,
+				false,
+				'This state does not exist!'
+			);
+		}
+		all_states_of_selected_appliance.forEach((new_state_name) => {
+			state[new_state_name] = new_states[new_state_name];
+		});
+		state.save();
+	} catch (error) {
+		console.log(chalk.redBright.bold(error));
+		return helper.internalServerError(res);
+	}
 };
 
 // get current state of the appliance for the requesting user
