@@ -10,7 +10,7 @@ const Appliance = require('../../../models/Appliance');
 
 // return all the states for this appliance
 // req.body => { appliance_name }
-module.exports.getStatesForAppliance = (req, res) => {
+module.exports.getStateNamesForAppliance = (req, res) => {
 	const appliance_name = req.body.appliance_name;
 	if (!appliance_name) {
 		return res.status(StatusCodes.NOT_ACCEPTABLE).json({
