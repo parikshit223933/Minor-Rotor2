@@ -9,12 +9,7 @@
 	color: #ff0093;
 	font-weight: 900;
 }
-.btn-primary {
-	background-color: #ce0053 !important;
-	border: none !important;
-	outline: none !important;
-}
-.btn:focus {
-	outline: none !important;
-	box-shadow: none !important;
+.form-control:focus {
+	border-color: #ff0093;
+	box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.363);
 }
