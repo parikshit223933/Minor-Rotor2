@@ -11,35 +11,37 @@ class SignIn extends React.Component {
 					Sign In
 				</div>
 				<form>
-					<div class="form-group">
+					<div className="form-group">
 						<label htmlFor="email-address">Email address</label>
 						<input
 							type="email"
-							class="form-control"
+							className="form-control"
 							id="email-address"
 							aria-describedby="email"
 						/>
 					</div>
-					<div class="form-group">
+					<div className="form-group">
 						<label htmlFor="password">Password</label>
 						<input
 							type="password"
-							class="form-control"
+							className="form-control"
 							id="password"
 						/>
 					</div>
 
-					<button type="submit" class="btn inline btn-primary">
-						Submit&nbsp;&nbsp;
-						<ButtonSpinner />
-					</button>
-					<Link
-						to="/"
-						type="button"
-						class="btn inline btn-secondary ml-4"
-					>
-						Back
-					</Link>
+					<div className="form-group mt-4">
+						<button type="submit" className="btn inline btn-primary">
+							Submit&nbsp;&nbsp;
+							<ButtonSpinner />
+						</button>
+						<Link
+							to="/"
+							type="button"
+							className="btn inline btn-secondary ml-4"
+						>
+							Back
+						</Link>
+					</div>
 				</form>
 			</div>
 		);

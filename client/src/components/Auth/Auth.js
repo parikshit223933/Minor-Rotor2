@@ -10,7 +10,7 @@ class Auth extends React.Component {
 					<Link
 						to="/sign-up"
 						type="button"
-						class="btn btn-lg my-4 w-100 btn-primary"
+						className="btn btn-lg my-4 w-100 btn-primary"
 					>
 						Sign Up
 					</Link>
@@ -19,7 +19,7 @@ class Auth extends React.Component {
 					<Link
 						to="/sign-in"
 						type="button"
-						class="btn btn-lg my-4 w-100 btn-primary"
+						className="btn btn-lg my-4 w-100 btn-primary"
 					>
 						Sign In
 					</Link>

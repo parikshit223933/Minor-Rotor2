@@ -12,55 +12,57 @@ class SignUp extends React.Component {
 				</div>
 				<form>
 					{' '}
-					<div class="form-group">
+					<div className="form-group">
 						<label htmlFor="name">Name</label>
 						<input
 							type="text"
-							class="form-control"
+							className="form-control"
 							id="name"
 							aria-describedby="name"
 						/>
 					</div>
-					<div class="form-group">
+					<div className="form-group">
 						<label htmlFor="email-address">Email address</label>
 						<input
 							type="email"
-							class="form-control"
+							className="form-control"
 							id="email-address"
 							aria-describedby="email"
 						/>
 					</div>
 					<div className="row">
-						<div class="form-group col-lg-6">
+						<div className="form-group col-lg-6">
 							<label htmlFor="password">Password</label>
 							<input
 								type="password"
-								class="form-control"
+								className="form-control"
 								id="password"
 							/>
 						</div>
-						<div class="form-group col-lg-6">
+						<div className="form-group col-lg-6">
 							<label htmlFor="confirm-password">
 								Confirm Password
 							</label>
 							<input
 								type="password"
-								class="form-control"
+								className="form-control"
 								id="confirm-password"
 							/>
 						</div>
 					</div>
-					<button type="button" class="btn inline btn-primary">
-						Submit&nbsp;&nbsp;
-						<ButtonSpinner />
-					</button>
-					<Link
-						to="/"
-						type="button"
-						class="btn inline btn-secondary ml-4"
-					>
-						Back
-					</Link>
+					<div className="form-group mt-3">
+						<button type="button" className="btn inline btn-primary">
+							Submit&nbsp;&nbsp;
+							<ButtonSpinner />
+						</button>
+						<Link
+							to="/"
+							type="button"
+							className="btn inline btn-secondary ml-4"
+						>
+							Back
+						</Link>
+					</div>
 				</form>
 			</div>
 		);
