@@ -1,6 +1,7 @@
 import React from 'react';
 import './SignIn.scss';
-import {ButtonSpinner} from '../';
+import { ButtonSpinner } from '../';
+import { Link } from 'react-router-dom';
 
 class SignIn extends React.Component {
 	render() {
@@ -28,9 +29,17 @@ class SignIn extends React.Component {
 						/>
 					</div>
 
-					<button type="submit" class="btn btn-primary">
-						Submit&nbsp;&nbsp;<ButtonSpinner/>
+					<button type="submit" class="btn inline btn-primary">
+						Submit&nbsp;&nbsp;
+						<ButtonSpinner />
 					</button>
+					<Link
+						to="/"
+						type="button"
+						class="btn inline btn-secondary ml-4"
+					>
+						Back
+					</Link>
 				</form>
 			</div>
 		);

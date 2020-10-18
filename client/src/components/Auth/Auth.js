@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Auth.scss';
 
 class Auth extends React.Component {
@@ -6,20 +7,22 @@ class Auth extends React.Component {
 		return (
 			<div className="authentication-area p-3 mb-4">
 				<div className="sign-up">
-					<button
+					<Link
+						to="/sign-up"
 						type="button"
 						class="btn btn-lg my-4 w-100 btn-primary"
 					>
 						Sign Up
-					</button>
+					</Link>
 				</div>
 				<div className="sign-in">
-					<button
+					<Link
+						to="/sign-in"
 						type="button"
 						class="btn btn-lg my-4 w-100 btn-primary"
 					>
 						Sign In
-					</button>
+					</Link>
 				</div>
 			</div>
 		);

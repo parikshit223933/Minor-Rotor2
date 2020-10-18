@@ -2,7 +2,7 @@ import React from 'react';
 import './home.scss';
 import bulb from '../../assets/svgs/undraw_lightbulb_moment_evxr.svg';
 import { Auth, SignIn, SignUp } from '../';
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 class Home extends React.Component {
 	render() {
 		return (
@@ -18,9 +18,11 @@ class Home extends React.Component {
 						<div className="text-center site-logo font-40 mb-5">
 							AUTOMATE
 						</div>
-						{/* <Auth /> */}
-						<SignIn/>
-						{/* <SignUp/> */}
+						<Router>
+							<Route exact path="/sign-in" component={SignIn} />
+							<Route exact path="/sign-up" component={SignUp} />
+							<Route exact path="/" component={Auth} />
+						</Router>
 					</div>
 				</div>
 			</div>
