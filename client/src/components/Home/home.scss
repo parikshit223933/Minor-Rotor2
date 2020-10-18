@@ -1,0 +1,20 @@
+.home-component {
+	.intro-box {
+		box-shadow: 0px 0px 14px 0px #bfbfbf;
+	}
+}
+.site-logo {
+	font-family: 'Shadows Into Light', cursive;
+	letter-spacing: 10px;
+	color: #ff0093;
+	font-weight: 900;
+}
+.btn-primary {
+	background-color: #ce0053 !important;
+	border: none !important;
+	outline: none !important;
+}
+.btn:focus {
+	outline: none !important;
+	box-shadow: none !important;
+}
