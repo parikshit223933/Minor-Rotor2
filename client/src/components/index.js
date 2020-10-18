@@ -4,5 +4,5 @@ import SignIn from './Sign/SignIn';
 import SignUp from './Sign/SignUp';
 import ButtonSpinner from './Spinners/ButtonSpinner';
 import SelectAppliances from './SelectAppliances/SelectAppliances';
-
-export { Home, Auth, SignIn, SignUp, ButtonSpinner, SelectAppliances };
+import Stats from './Stats/Stats';
+export { Home, Auth, SignIn, SignUp, ButtonSpinner, SelectAppliances, Stats };

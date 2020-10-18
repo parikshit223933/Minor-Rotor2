@@ -44,20 +44,6 @@ class SelectAppliances extends React.Component {
 									FAN
 								</label>
 							</div>
-							<div className="form-check my-3">
-								<input
-									className="form-check-input"
-									type="checkbox"
-									id="checkBox-3"
-									value="option3"
-								/>
-								<label
-									className="form-check-label"
-									htmlFor="checkBox-3"
-								>
-									REFRIGERATOR
-								</label>
-							</div>
 						</div>
 						<div className="form-group mt-4">
 							<button
