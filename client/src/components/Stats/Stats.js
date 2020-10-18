@@ -12,14 +12,18 @@ class Stats extends React.Component {
 						</div>
 						<div className="status-container">
 							<div className="appliance my-3">
-								<div className="mb-3"><b>BULB</b></div>
-                <div className="pl-3">isTurnedOn: true</div>
-                <div className="pl-3">Intensity: 50%</div>
+								<div className="mb-3">
+									<b>BULB</b>
+								</div>
+								<div className="pl-3">isTurnedOn: true</div>
+								<div className="pl-3">Intensity: 50%</div>
 							</div>
-              <div className="appliance">
-								<div className="mb-3"><b>BULB</b></div>
-                <div className="pl-3">isTurnedOn: true</div>
-                <div className="pl-3">Intensity: 50%</div>
+							<div className="appliance">
+								<div className="mb-3">
+									<b>Fan</b>
+								</div>
+								<div className="pl-3">isTurnedOn: true</div>
+								<div className="pl-3">Speed: 50%</div>
 							</div>
 						</div>
 					</div>
