@@ -2,8 +2,30 @@ import React from 'react';
 import './SignIn.scss';
 import { ButtonSpinner } from '../';
 import { Link } from 'react-router-dom';
+import { login } from '../../actions/auth';
+import chalk from 'chalk';
+import { connect } from 'react-redux';
 
 class SignIn extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			email: '',
+			password: '',
+		};
+	}
+	handleOnChange = (param, newState) => {
+		this.setState({
+			[param]: newState,
+		});
+	};
+	onSubmit = () => {
+		if (!this.state.email || !this.state.password) {
+			console.log(chalk.redBright.bold('You cant submit it dude!'));
+			return;
+		}
+		this.props.dispatch(login(this.state.email, this.state.password));
+	};
 	render() {
 		return (
 			<div className="sign-in">
@@ -18,6 +40,9 @@ class SignIn extends React.Component {
 							className="form-control"
 							id="email-address"
 							aria-describedby="email"
+							onChange={(event) =>
+								this.handleOnChange('email', event.target.value)
+							}
 						/>
 					</div>
 					<div className="form-group">
@@ -26,11 +51,21 @@ class SignIn extends React.Component {
 							type="password"
 							className="form-control"
 							id="password"
+							onChange={(event) =>
+								this.handleOnChange(
+									'password',
+									event.target.value
+								)
+							}
 						/>
 					</div>
 
 					<div className="form-group mt-4">
-						<button type="submit" className="btn inline btn-primary">
+						<button
+							onClick={this.onSubmit}
+							type="button"
+							className="btn inline btn-primary"
+						>
 							Submit&nbsp;&nbsp;
 							<ButtonSpinner />
 						</button>
@@ -47,4 +82,9 @@ class SignIn extends React.Component {
 		);
 	}
 }
-export default SignIn;
+const mapStateToProps = ({ ...state }) => {
+	return {
+		auth: state.auth,
+	};
+};
+export default connect(mapStateToProps)(SignIn);

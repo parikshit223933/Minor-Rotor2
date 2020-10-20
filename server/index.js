@@ -11,8 +11,8 @@ const MongoStore = require('connect-mongo')(session);
 const sessionName = 'something'; // to be changed at production
 const sessionSecret = 'something'; // to be changed at production
 
-app.use('/', routes);
 app.use(cors()); // enable all
+app.use('/', routes);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(

@@ -68,8 +68,8 @@ module.exports.signUp = async (req, res) => {
 
 // req.body => {email, password}
 module.exports.signIn = async (req, res) => {
-	const email = req.body.email;
-	const password = req.body.password;
+	const email = req.body?req.body.email:undefined;
+	const password = req.body?req.body.password:undefined;
 
 	if (!email || !password) {
 		return res.status(StatusCodes.NO_CONTENT).json({
