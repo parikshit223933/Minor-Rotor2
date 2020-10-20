@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import { Home, SelectAppliances } from '../index';
-import {Stats} from '../';
+import { Stats } from '../';
 
 class App extends React.Component {
 	render() {
@@ -10,9 +10,9 @@ class App extends React.Component {
 			<div className="App">
 				<Router>
 					<Switch>
-						<Route exact path="/" component={Home} />
-						<Route path="/select-appliances" component={SelectAppliances} />
-						<Route path="/stats" component={Stats} />
+						<Route exact path="/select-appliances" component={SelectAppliances} />
+						<Route exact path="/stats" component={Stats} />
+						<Route path="/" component={Home} />
 					</Switch>
 				</Router>
 			</div>
