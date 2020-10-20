@@ -66,8 +66,11 @@ class SignIn extends React.Component {
 							type="button"
 							className="btn inline btn-primary"
 						>
-							Submit&nbsp;&nbsp;
-							<ButtonSpinner />
+							Submit
+							{this.props.auth.inProgress && <span>&nbsp;&nbsp;</span>}
+							{this.props.auth.inProgress && (
+								<ButtonSpinner />
+							)}
 						</button>
 						<Link
 							to="/"
