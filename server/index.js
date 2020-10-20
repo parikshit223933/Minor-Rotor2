@@ -5,11 +5,38 @@ const chalk = require('chalk');
 const routes = require('./routes');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const db = require('./config/mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const sessionName = 'something'; // to be changed at production
+const sessionSecret = 'something'; // to be changed at production
 
 app.use('/', routes);
 app.use(cors()); // enable all
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+	session({
+		name: sessionName,
+		secret: sessionSecret,
+		saveUninitialized: false, // don't create session until something stored
+		resave: false, //don't save session if unmodified
+		cookie: {
+			maxAge: 1000 * 60 * 60 * 24, // one day
+		},
+		store: new MongoStore(
+			{
+				mongooseConnection: db,
+			},
+			(error) =>
+				console.log(
+					chalk.greenBright.bold(
+						error || 'Connect-Mongo setup is working fine!'
+					)
+				)
+		),
+	})
+);
 
 app.listen(port, (error) => {
 	if (error) {
