@@ -2,6 +2,8 @@ const { ReasonPhrases, StatusCodes } = require('http-status-codes');
 const User = require('../../../models/user');
 const chalk = require('chalk');
 const helper = require('../../../helpers/helper');
+const jwt= require('jsonwebtoken');
+const passportJWTSecret = 'something';
 
 // req.body => {name, email, password, confirmPassword}
 module.exports.signUp = async (req, res) => {
@@ -46,6 +48,7 @@ module.exports.signUp = async (req, res) => {
 					success: true,
 					message: 'Account created successfully!',
 					data: {
+						token:jwt.sign(user.toJSON(), passportJWTSecret, {expiresIn:1000*60*60*24}),
 						user: {
 							name: user.name,
 							email: user.email,
@@ -90,6 +93,7 @@ module.exports.signIn = async (req, res) => {
 					success: true,
 					message: 'Logged in successfully',
 					data: {
+						token:jwt.sign(user.toJSON(), passportJWTSecret, {expiresIn:1000*60*60*24}),
 						user: {
 							name: user.name,
 							email: user.email,
