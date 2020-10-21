@@ -39,6 +39,7 @@ export const login = (email, password) => {
 			},
 			body: formurlencoded({ email, password }),
 		})
+			.then((res) => res.json())
 			.then((data) => {
 				if (data.success) {
 					localStorage.setItem('token', data.data.user);
@@ -83,6 +84,7 @@ export const signUp = (name, email, password, confirmPassword) => {
 			},
 			body: formurlencoded({ name, email, password, confirmPassword }),
 		})
+			.then((res) => res.json())
 			.then((data) => {
 				if (data.success) {
 					localStorage.setItem('token', data.data.user);

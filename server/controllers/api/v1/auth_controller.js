@@ -46,8 +46,10 @@ module.exports.signUp = async (req, res) => {
 					success: true,
 					message: 'Account created successfully!',
 					data: {
-						name: user.name,
-						email: user.email,
+						user: {
+							name: user.name,
+							email: user.email,
+						},
 					},
 				});
 			} catch (error) {
@@ -88,8 +90,10 @@ module.exports.signIn = async (req, res) => {
 					success: true,
 					message: 'Logged in successfully',
 					data: {
-						name: user.name,
-						email: user.email,
+						user: {
+							name: user.name,
+							email: user.email,
+						},
 					},
 				});
 			}
