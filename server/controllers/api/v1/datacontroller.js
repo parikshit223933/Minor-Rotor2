@@ -17,6 +17,7 @@ module.exports.AllData= async function(req,res){
         })
         let users=await User.find({});
         console.log('---------users--------',users)
+        console.log('-----appliances---',appliances)
         return res.render('data',{
             title:"Automation|DATA",
             appliances:appliances,

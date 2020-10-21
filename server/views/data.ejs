@@ -20,9 +20,45 @@
          </div>
          <div class="col available-appliances">
             <div class="head">Available Appliances</div>
+            <div class="list appliances">
+                <%for(user of all_users){%>
+                    
+                     <div class="user-appliances">
+                        <%for(appliance of user.appliances){%>
+                            <div class="appliance">
+                                <%=appliance.name%>
+                            </div>
+                        <%}%>
+                     </div>
+             
+                  <%}%>
+            </div>
          </div>
          <div class="col current-status">
             <div class="head">Current Status</div>
+            <div class="list email">
+                <%for(user of all_users){%>
+                    
+                    <div class="user-appliances">
+                       <%for(appliance of user.appliances){%>
+                           <div class="appliance">
+                               <%for(state of appliance.state){%>
+                                       <div class="state">
+                                        <%=state.isTurnedOn%>
+                                       </div>
+                                      <%if(state.speed){%>
+                                          <div class="state"><%=state.speed%></div>
+                                      <%}else{%>
+                                     
+                                        <div class="state"><%=state.intensity%></div>
+                                      <%}%>
+                               <%}%>
+                           </div>
+                       <%}%>
+                    </div>
+            
+                 <%}%>
+            </div>
          </div>
            
       </div>
