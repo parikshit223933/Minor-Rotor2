@@ -1,12 +1,30 @@
 <html>
     <head>
         <title>
-            ALL DATA
+            <%=title%>
         </title>
         <script src="https://kit.fontawesome.com/af827e2ea3.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/CSS/data.css">
     </head>
     <body>
-      <h1>REal DEaling with data</h1>
+      <div class="datacontainer">
+         <div class="col usermail">
+            <div class="head">User Email</div>
+            <div class="list email">
+                <%for(user of all_users){%>
+                    
+                      <%=user.email%>
+             
+                  <%}%>
+            </div>
+         </div>
+         <div class="col available-appliances">
+            <div class="head">Available Appliances</div>
+         </div>
+         <div class="col current-status">
+            <div class="head">Current Status</div>
+         </div>
+           
+      </div>
     </body>
 </html>

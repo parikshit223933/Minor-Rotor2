@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #d53369;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #cbad6d, #d53369);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #cbad6d, #d53369);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+
+.datacontainer {
+  width: 90%;
+  left: 5%;
+  top: 70px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  background-color: #fbffbf; }
+  .datacontainer .col {
+    position: relative;
+    width: 33%;
+    border: 2px solid #d44069; }
+    .datacontainer .col .head {
+      position: relative;
+      padding: 8px 0px;
+      font-size: 21px;
+      width: 100%;
+      color: #d44069;
+      font-weight: 700;
+      text-align: center; }
+    .datacontainer .col .list {
+      position: relative;
+      width: 100%; }
