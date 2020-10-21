@@ -7,9 +7,15 @@ const {
 const User = require('../../../models/user');
 const chalk = require('chalk');
 const helper = require('../../../helpers/helper');
+const { text } = require('express');
+
+const test = () => {
+	console.log('HERE ******************************************************');
+};
 
 // req.body => {name, email, password, confirmPassword}
 module.exports.signUp = async (req, res) => {
+	test()
 	const name = req.body.name;
 	const password = req.body.password;
 	const confirmPassword = req.body.confirmPassword;
@@ -68,8 +74,8 @@ module.exports.signUp = async (req, res) => {
 
 // req.body => {email, password}
 module.exports.signIn = async (req, res) => {
-	const email = req.body?req.body.email:undefined;
-	const password = req.body?req.body.password:undefined;
+	const email = req.body ? req.body.email : undefined;
+	const password = req.body ? req.body.password : undefined;
 
 	if (!email || !password) {
 		return res.status(StatusCodes.NO_CONTENT).json({

@@ -8,26 +8,25 @@ const cookieParser = require('cookie-parser');
 const db = require('./config/mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const sassMiddleware=require('node-sass-middleware');
+const sassMiddleware = require('node-sass-middleware');
 const sessionName = 'something'; // to be changed at production
 const sessionSecret = 'something'; // to be changed at production
 
-app.use(sassMiddleware({
-	src:'./assets/SCSS',
-	dest:'./assets/CSS',
-	debug:true,
-	outputStyle:'extended',
-	prefix:'/css'
-  }));
-
-
+app.use(
+	sassMiddleware({
+		src: './assets/SCSS',
+		dest: './assets/CSS',
+		debug: true,
+		outputStyle: 'extended',
+		prefix: '/css',
+	})
+);
 app.use(cors()); // enable all
 app.use(express.static('./assets'));
-app.use('/', routes);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-app.set('view engine','ejs');
-app.set('views','./views');
+app.set('view engine', 'ejs');
+app.set('views', './views');
 app.use(
 	session({
 		name: sessionName,
@@ -50,6 +49,7 @@ app.use(
 		),
 	})
 );
+app.use('/', routes);
 
 app.listen(port, (error) => {
 	if (error) {
