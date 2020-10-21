@@ -42,7 +42,7 @@ export const login = (email, password) => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.success) {
-					localStorage.setItem('token', data.data.user);
+					localStorage.setItem('token', data.data.token);
 					dispatch(loginSuccess(data.data.user));
 					return;
 				} else {
@@ -87,7 +87,7 @@ export const signUp = (name, email, password, confirmPassword) => {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.success) {
-					localStorage.setItem('token', data.data.user);
+					localStorage.setItem('token', data.data.token);
 					dispatch(signupSuccess(data.data.user));
 					return;
 				} else {
