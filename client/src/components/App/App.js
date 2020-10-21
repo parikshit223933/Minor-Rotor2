@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
-import { Home, SelectAppliances } from '../index';
+import { Home, RestrictedRoute, SelectAppliances } from '../index';
 import { Stats, PrivaterRoute } from '../';
 
 class App extends React.Component {
@@ -12,7 +12,7 @@ class App extends React.Component {
 					<Switch>
 						<PrivaterRoute exact path="/select-appliances" component={SelectAppliances} />
 						<PrivaterRoute exact path="/stats" component={Stats} />
-						<Route path="/" component={Home} />
+						<RestrictedRoute path="/" component={Home} />
 					</Switch>
 				</Router>
 			</div>

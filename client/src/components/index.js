@@ -5,7 +5,8 @@ import SignUp from './Sign/SignUp';
 import ButtonSpinner from './Spinners/ButtonSpinner';
 import SelectAppliances from './SelectAppliances/SelectAppliances';
 import Stats from './Stats/Stats';
-import PrivaterRoute from './PrivateRoute/PrivateRoute';
+import PrivaterRoute from './SpecialRoutes/PrivateRoute';
+import RestrictedRoute from './SpecialRoutes/RestrictedRoute';
 
 export {
 	Home,
@@ -16,4 +17,5 @@ export {
 	SelectAppliances,
 	Stats,
 	PrivaterRoute,
+	RestrictedRoute
 };
