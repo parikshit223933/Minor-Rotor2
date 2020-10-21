@@ -1,5 +1,8 @@
-import { API_URLS } from '../helpers/urls';
+import { API_ROOT, API_URLS } from '../helpers/urls';
 import {
+	AUTHENTICATE_USER_FAILURE,
+	AUTHENTICATE_USER_START,
+	AUTHENTICATE_USER_SUCCESS,
 	LOGIN_FAILURE,
 	LOGIN_START,
 	LOGIN_SUCCESS,
@@ -96,6 +99,49 @@ export const signUp = (name, email, password, confirmPassword) => {
 			})
 			.catch((error) => {
 				console.log(chalk.redBright.bold(error));
+			});
+	};
+};
+
+export const authenticateUserStart = () => {
+	return {
+		type: AUTHENTICATE_USER_START,
+	};
+};
+export const authenticateUserSuccess = (user) => {
+	return {
+		type: AUTHENTICATE_USER_SUCCESS,
+	};
+};
+export const authenticateUserFailure = (error) => {
+	return {
+		type: AUTHENTICATE_USER_FAILURE,
+	};
+};
+export const authenticateUser = (email, name, _id) => {
+	return (dispatch) => {
+		dispatch(authenticateUserStart());
+		const url = API_URLS.authenticateUser();
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+			body: formurlencoded({ name, email, _id }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.success) {
+					dispatch(authenticateUserSuccess(data.data.user));
+					return;
+				} else {
+					localStorage.removeItem('token');
+					dispatch(authenticateUserFailure('Please login again!'));
+				}
+			})
+			.catch((error) => {
+				console.log(error);
 			});
 	};
 };

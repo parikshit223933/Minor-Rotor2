@@ -2,8 +2,8 @@ const { ReasonPhrases, StatusCodes } = require('http-status-codes');
 const User = require('../../../models/user');
 const chalk = require('chalk');
 const helper = require('../../../helpers/helper');
-const jwt= require('jsonwebtoken');
-const passportJWTSecret = 'something';
+const jwt = require('jsonwebtoken');
+let passportJWTSecret = 'something';
 
 // req.body => {name, email, password, confirmPassword}
 module.exports.signUp = async (req, res) => {
@@ -48,7 +48,15 @@ module.exports.signUp = async (req, res) => {
 					success: true,
 					message: 'Account created successfully!',
 					data: {
-						token:jwt.sign(user.toJSON(), passportJWTSecret, {expiresIn:1000*60*60*24}),
+						token: jwt.sign(
+							{
+								email: user.email,
+								name: user.name,
+								_id: user.id,
+							},
+							passportJWTSecret,
+							{ expiresIn: 1000 * 60 * 60 * 24 }
+						),
 						user: {
 							name: user.name,
 							email: user.email,
@@ -93,7 +101,16 @@ module.exports.signIn = async (req, res) => {
 					success: true,
 					message: 'Logged in successfully',
 					data: {
-						token:jwt.sign(user.toJSON(), passportJWTSecret, {expiresIn:1000*60*60*24}),
+						token: jwt.sign(
+							{
+								email: user.email,
+								name: user.name,
+								_id: user.id,
+							},
+							passportJWTSecret,
+							{ expiresIn: 1000 * 60 * 60 * 24 }
+						),
+
 						user: {
 							name: user.name,
 							email: user.email,
@@ -113,12 +130,11 @@ module.exports.signIn = async (req, res) => {
 		return helper.internalServerError(res);
 	}
 };
-
-module.exports.authenticateUser =async (req, res) => {
-	return helper.response(
-		res,
-		StatusCodes.OK,
-		true,
-		'Authenticated'
-	);
+// req.body => {name, email, _id}
+module.exports.authenticateUser = async (req, res) => {
+	return helper.response(res, StatusCodes.OK, true, 'Authenticated', {
+		name:req.body.name,
+		email:req.body.email,
+		_id:req.body._id,
+	});
 };

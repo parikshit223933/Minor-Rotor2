@@ -10,6 +10,7 @@
     "axios": "^0.20.0",
     "chalk": "^4.1.0",
     "form-urlencoded": "^4.2.1",
+    "jwt-decode": "^3.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-redux": "^7.2.1",

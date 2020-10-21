@@ -11,7 +11,6 @@ const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
 const sessionName = 'something'; // to be changed at production
 const sessionSecret = 'something'; // to be changed at production
-const passportJWT=require('./config/jwt');
 
 app.use(
 	sassMiddleware({
