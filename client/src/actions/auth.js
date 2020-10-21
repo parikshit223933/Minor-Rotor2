@@ -135,13 +135,13 @@ export const authenticateUser = (email, name, _id) => {
 				if (data.success) {
 					dispatch(authenticateUserSuccess(data.data.user));
 					return;
-				} else {
-					localStorage.removeItem('token');
-					dispatch(authenticateUserFailure('Please login again!'));
 				}
 			})
-			.catch((error) => {
-				console.log(error);
-			});
+			.catch(error=>
+				{
+					localStorage.removeItem('token');
+					dispatch(authenticateUserFailure('Please login again!'));
+					console.log('Invalid token, Unauthorized!');
+				})
 	};
 };

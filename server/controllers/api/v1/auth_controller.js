@@ -55,7 +55,7 @@ module.exports.signUp = async (req, res) => {
 								_id: user.id,
 							},
 							passportJWTSecret,
-							{ expiresIn: 1000 * 60 * 60 * 24 }
+							{ expiresIn: (1000 * 60 * 60 * 24).toString() }
 						),
 						user: {
 							name: user.name,
@@ -108,7 +108,7 @@ module.exports.signIn = async (req, res) => {
 								_id: user.id,
 							},
 							passportJWTSecret,
-							{ expiresIn: 1000 * 60 * 60 * 24 }
+							{ expiresIn: (1000 * 60 * 60 * 24).toString() }
 						),
 
 						user: {
@@ -133,8 +133,8 @@ module.exports.signIn = async (req, res) => {
 // req.body => {name, email, _id}
 module.exports.authenticateUser = async (req, res) => {
 	return helper.response(res, StatusCodes.OK, true, 'Authenticated', {
-		name:req.body.name,
-		email:req.body.email,
-		_id:req.body._id,
+		name: req.body.name,
+		email: req.body.email,
+		_id: req.body._id,
 	});
 };
