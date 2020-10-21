@@ -5,4 +5,15 @@ import SignUp from './Sign/SignUp';
 import ButtonSpinner from './Spinners/ButtonSpinner';
 import SelectAppliances from './SelectAppliances/SelectAppliances';
 import Stats from './Stats/Stats';
-export { Home, Auth, SignIn, SignUp, ButtonSpinner, SelectAppliances, Stats };
+import PrivaterRoute from './PrivateRoute/PrivateRoute';
+
+export {
+	Home,
+	Auth,
+	SignIn,
+	SignUp,
+	ButtonSpinner,
+	SelectAppliances,
+	Stats,
+	PrivaterRoute,
+};
