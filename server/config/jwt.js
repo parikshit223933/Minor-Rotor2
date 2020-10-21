@@ -6,7 +6,7 @@ const User = require('../models/user');
 const passportJWTSecret = 'something';
 
 passport.use(
-	JWTStrategy(
+	new JWTStrategy(
 		{
 			jwtFromRequest: extractJWT.fromAuthHeaderAsBearerToken,
 			secretOrKey: passportJWTSecret,
@@ -27,4 +27,4 @@ passport.use(
 	)
 );
 
-module.exports=passport;
+module.exports = passport;

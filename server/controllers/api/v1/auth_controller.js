@@ -114,27 +114,7 @@ module.exports.signIn = async (req, res) => {
 	}
 };
 
-// req.body => {userId, email}
 module.exports.authenticateUser =async (req, res) => {
-	const {userId, email}=req.body;
-	if (!userId || !email) {
-		return helper.response(
-			res,
-			StatusCodes.NOT_ACCEPTABLE,
-			false,
-			'Invalid Token'
-		);
-	}
-	let user =await User.findById(userId);
-	if(!user||user.email!=email)
-	{
-		return helper.response(
-			res,
-			StatusCodes.NOT_ACCEPTABLE,
-			false,
-			'Invalid Token'
-		);
-	}
 	return helper.response(
 		res,
 		StatusCodes.OK,
