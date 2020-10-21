@@ -1,6 +1,6 @@
-const User = require('../../../models/user');
-const States = require('../../../models/State');
-const Appliances = require('../../../models/Appliance');
+const User = require('../models/user');
+const States = require('../models/State');
+const Appliances = require('../models/Appliance');
 
 module.exports.AllData = async function (req, res) {
 	try {
