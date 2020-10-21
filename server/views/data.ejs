@@ -1,12 +1,66 @@
 <html>
     <head>
         <title>
-            ALL DATA
+            <%=title%>
         </title>
         <script src="https://kit.fontawesome.com/af827e2ea3.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/CSS/data.css">
     </head>
     <body>
-      <h1>REal DEaling with data</h1>
+      <div class="datacontainer">
+         <div class="col usermail">
+            <div class="head">User Email</div>
+            <div class="list email">
+                <%for(user of all_users){%>
+                    
+                      <%=user.email%>
+             
+                  <%}%>
+            </div>
+         </div>
+         <div class="col available-appliances">
+            <div class="head">Available Appliances</div>
+            <div class="list appliances">
+                <%for(user of all_users){%>
+                    
+                     <div class="user-appliances">
+                        <%for(appliance of user.appliances){%>
+                            <div class="appliance">
+                                <%=appliance.name%>
+                            </div>
+                        <%}%>
+                     </div>
+             
+                  <%}%>
+            </div>
+         </div>
+         <div class="col current-status">
+            <div class="head">Current Status</div>
+            <div class="list email">
+                <%for(user of all_users){%>
+                    
+                    <div class="user-appliances">
+                       <%for(appliance of user.appliances){%>
+                           <div class="appliance">
+                               <%for(state of appliance.state){%>
+                                       <div class="state">
+                                        <%=state.isTurnedOn%>
+                                       </div>
+                                      <%if(state.speed){%>
+                                          <div class="state"><%=state.speed%></div>
+                                      <%}else{%>
+                                     
+                                        <div class="state"><%=state.intensity%></div>
+                                      <%}%>
+                               <%}%>
+                           </div>
+                       <%}%>
+                    </div>
+            
+                 <%}%>
+            </div>
+         </div>
+           
+      </div>
     </body>
 </html>

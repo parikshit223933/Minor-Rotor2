@@ -18,9 +18,10 @@ app.use(
 		dest: './assets/CSS',
 		debug: true,
 		outputStyle: 'extended',
-		prefix: '/css',
+		prefix: '/CSS',
 	})
 );
+
 app.use(cors()); // enable all
 app.use(express.static('./assets'));
 app.use(cookieParser());

@@ -1,6 +1,6 @@
-const User = require('../models/user');
-const States = require('../models/State');
-const Appliances = require('../models/Appliance')
+const User = require('../../../models/user');
+const States = require('../../../models/State');
+const Appliances = require('../../../models/Appliance')
 
 module.exports.AllData= async function(req,res){
     try{
@@ -15,18 +15,9 @@ module.exports.AllData= async function(req,res){
                 path:'admin'
             }
         })
-
-        // let states=await States.find({})
-        // .sort('-createdAt')
-        // .populate('user')
-        // .populate({ 
-        //     path:'comments',
-        //     populate:{
-        //         path:'user'
-        //     }
-        // });
         let users=await User.find({});
-
+        console.log('---------users--------',users)
+        console.log('-----appliances---',appliances)
         return res.render('data',{
             title:"Automation|DATA",
             appliances:appliances,
