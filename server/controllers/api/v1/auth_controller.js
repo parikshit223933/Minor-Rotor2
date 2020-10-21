@@ -1,21 +1,10 @@
-const {
-	ReasonPhrases,
-	StatusCodes,
-	getReasonPhrase,
-	getStatusCode,
-} = require('http-status-codes');
+const { ReasonPhrases, StatusCodes } = require('http-status-codes');
 const User = require('../../../models/user');
 const chalk = require('chalk');
 const helper = require('../../../helpers/helper');
-const { text } = require('express');
-
-const test = () => {
-	console.log('HERE ******************************************************');
-};
 
 // req.body => {name, email, password, confirmPassword}
 module.exports.signUp = async (req, res) => {
-	test()
 	const name = req.body.name;
 	const password = req.body.password;
 	const confirmPassword = req.body.confirmPassword;

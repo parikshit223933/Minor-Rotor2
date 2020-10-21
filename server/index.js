@@ -28,6 +28,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', './views');
+app.use('/', routes);
 app.use(
 	session({
 		name: sessionName,
@@ -50,7 +51,6 @@ app.use(
 		),
 	})
 );
-app.use('/', routes);
 
 app.listen(port, (error) => {
 	if (error) {
