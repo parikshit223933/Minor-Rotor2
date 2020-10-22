@@ -151,12 +151,11 @@ export const authenticateUser = (email, name, _id) => {
 					dispatch(authenticateUserSuccess(data.data.user));
 					return;
 				}
+				else
+				{
+					dispatch(authenticateUserFailure('authentication failed!'));
+				}
 			})
-			.catch((error) => {
-				localStorage.removeItem('token');
-				dispatch(authenticateUserFailure('Please login again!'));
-				console.log('Invalid token, Unauthorized!');
-			});
 	};
 };
 

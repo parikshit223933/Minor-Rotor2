@@ -34,6 +34,11 @@ class SelectAppliances extends React.Component {
 		}
 	};
 	handleOnSubmit = () => {
+		if(this.state.appliances.length===0)
+		{
+			console.log('Please select atleast one appliance!');
+			return;
+		}
 		this.props.dispatch(
 			selectAppliances(
 				JwtDecode(localStorage.getItem('token'))._id,

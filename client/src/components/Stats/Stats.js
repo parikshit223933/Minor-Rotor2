@@ -7,7 +7,7 @@ import './Stats.scss';
 
 class Stats extends React.Component {
 	render() {
-		if(this.props.auth.inProgress)
+		if(this.props.auth.inProgress||this.props.auth.appliances.length===0)
 		{
 			return <ScreenSpinner/>
 		}
@@ -15,6 +15,7 @@ class Stats extends React.Component {
 		{
 			return <Redirect to="/sign-in"/>
 		}
+		console.log(Object.keys(this.props.auth.appliances[0]))
 		return (
 			<div className="stats-component pt-5 container">
 				<div className="row bg-white intro-box">
