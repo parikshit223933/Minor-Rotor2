@@ -7,12 +7,10 @@ import './Stats.scss';
 
 class Stats extends React.Component {
 	render() {
-		if (
-			this.props.auth.inProgress
-		) {
+		if (this.props.auth.inProgress) {
 			return <ScreenSpinner />;
 		}
-		
+
 		if (!this.props.auth.isLoggedIn) {
 			return <Redirect to="/sign-in" />;
 		}
@@ -42,11 +40,21 @@ class Stats extends React.Component {
 													key={`property-index-${index}`}
 												>
 													{property}:{' '}
-													{
-														appl[
-															Object.keys(appl)[0]
-														][property]
-													}
+													{typeof appl[
+														Object.keys(appl)[0]
+													][property] === typeof true
+														? appl[
+																Object.keys(
+																	appl
+																)[0]
+														  ][property] === false
+															? 'No'
+															: 'Yes'
+														: appl[
+																Object.keys(
+																	appl
+																)[0]
+														  ][property]}
 												</div>
 											);
 										})}
