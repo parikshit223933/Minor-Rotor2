@@ -27,7 +27,7 @@ class App extends React.Component {
 							component={SelectAppliances}
 						/>
 						<Route exact path="/stats" component={Stats} />
-						<RestrictedRoute exact path="/" component={Home} />
+						<RestrictedRoute path="/" component={Home} />
 						<Route component={Page404}/>
 					</Switch>
 				</Router>

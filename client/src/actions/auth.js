@@ -19,6 +19,7 @@ import {
 } from './actionTypes';
 import chalk from 'chalk';
 import formurlencoded from 'form-urlencoded';
+import JwtDecode from 'jwt-decode';
 
 export const startLogin = () => {
 	return {
@@ -54,6 +55,11 @@ export const login = (email, password) => {
 				if (data.success) {
 					localStorage.setItem('token', data.data.token);
 					dispatch(loginSuccess(data.data.user));
+					dispatch(
+						refreshAppliances(
+							JwtDecode(localStorage.getItem('token'))._id
+						)
+					);
 					return;
 				} else {
 					dispatch(loginFailed(data.message));
