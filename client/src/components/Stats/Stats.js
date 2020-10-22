@@ -2,20 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { logOut } from '../../actions/auth';
-import {ScreenSpinner} from '../';
+import { ScreenSpinner } from '../';
 import './Stats.scss';
 
 class Stats extends React.Component {
 	render() {
-		if(this.props.auth.inProgress||this.props.auth.appliances.length===0)
-		{
-			return <ScreenSpinner/>
+		if (
+			this.props.auth.inProgress ||
+			this.props.auth.appliances.length === 0
+		) {
+			return <ScreenSpinner />;
 		}
-		if(!this.props.auth.isLoggedIn)
-		{
-			return <Redirect to="/sign-in"/>
+		if (!this.props.auth.isLoggedIn) {
+			return <Redirect to="/sign-in" />;
 		}
-		console.log(Object.keys(this.props.auth.appliances[0]))
 		return (
 			<div className="stats-component pt-5 container">
 				<div className="row bg-white intro-box">
@@ -24,20 +24,35 @@ class Stats extends React.Component {
 							Current Status
 						</div>
 						<div className="status-container">
-							<div className="appliance my-3">
-								<div className="mb-3">
-									<b>BULB</b>
-								</div>
-								<div className="pl-3">isTurnedOn: true</div>
-								<div className="pl-3">Intensity: 50%</div>
-							</div>
-							<div className="appliance">
-								<div className="mb-3">
-									<b>Fan</b>
-								</div>
-								<div className="pl-3">isTurnedOn: true</div>
-								<div className="pl-3">Speed: 50%</div>
-							</div>
+							{this.props.auth.appliances.map((appl, index) => {
+								return (
+									<div
+										className="appliance my-3"
+										key={`appliance-index-${index}`}
+									>
+										<div className="mb-3">
+											<b>{Object.keys(appl)[0]}</b>
+										</div>
+										{Object.keys(
+											appl[Object.keys(appl)[0]]
+										).map((property, index) => {
+											return (
+												<div
+													className="pl-3"
+													key={`property-index-${index}`}
+												>
+													{property}:{' '}
+													{
+														appl[
+															Object.keys(appl)[0]
+														][property]
+													}
+												</div>
+											);
+										})}
+									</div>
+								);
+							})}
 						</div>
 					</div>
 					<div className="col-md-6 p-5">
@@ -49,7 +64,11 @@ class Stats extends React.Component {
 				</div>
 				<div className="row mt-5">
 					<div className="col-md-6 py-3 text-right intro-box offset-md-6 bg-light">
-						<button type="button" className="btn btn-danger" onClick={()=>this.props.dispatch(logOut())}>
+						<button
+							type="button"
+							className="btn btn-danger"
+							onClick={() => this.props.dispatch(logOut())}
+						>
 							Log Out
 						</button>
 					</div>
@@ -59,11 +78,10 @@ class Stats extends React.Component {
 	}
 }
 
-const mapStateToProps=({...state})=>
-{
+const mapStateToProps = ({ ...state }) => {
 	return {
-		auth:state.auth
-	}
-}
+		auth: state.auth,
+	};
+};
 
 export default connect(mapStateToProps)(Stats);
