@@ -14,6 +14,7 @@ import {
 	REFRESH_APPLIANCES_START,
 	REFRESH_APPLIANCES_SUCCESS,
 	REFRESH_APPLIANCES_FAILURE,
+	LOGOUT_SUCCESS,
 } from '../actions/actionTypes';
 
 const initialAuthState = {
@@ -142,6 +143,16 @@ export default function auth(state = initialAuthState, action) {
 				success: false,
 				error: action.error,
 				inProgress: false,
+			};
+		case LOGOUT_SUCCESS:
+			return {
+				...state,
+				user: {},
+				error: null,
+				isLoggedIn: false,
+				inProgress: false,
+				appliances: [],
+				success: true,
 			};
 		default:
 			return state;

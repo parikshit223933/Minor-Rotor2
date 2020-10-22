@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import { Home, RestrictedRoute, SelectAppliances } from '../index';
-import { Stats, PrivaterRoute } from '../';
+import { Stats, PrivaterRoute, Page404 } from '../';
 import jwt_decode from 'jwt-decode';
 import { connect } from 'react-redux';
 import { authenticateUser, refreshAppliances } from '../../actions/auth';
@@ -26,8 +26,9 @@ class App extends React.Component {
 							path="/select-appliances"
 							component={SelectAppliances}
 						/>
-						<PrivaterRoute exact path="/stats" component={Stats} />
-						<RestrictedRoute path="/" component={Home} />
+						<Route exact path="/stats" component={Stats} />
+						<RestrictedRoute exact path="/" component={Home} />
+						<Route component={Page404}/>
 					</Switch>
 				</Router>
 			</div>

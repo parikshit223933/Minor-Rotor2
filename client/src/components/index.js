@@ -7,6 +7,7 @@ import SelectAppliances from './SelectAppliances/SelectAppliances';
 import Stats from './Stats/Stats';
 import PrivaterRoute from './SpecialRoutes/PrivateRoute';
 import RestrictedRoute from './SpecialRoutes/RestrictedRoute';
+import Page404 from './Page404/Page404';
 
 export {
 	Home,
@@ -17,5 +18,6 @@ export {
 	SelectAppliances,
 	Stats,
 	PrivaterRoute,
-	RestrictedRoute
+	RestrictedRoute,
+	Page404
 };

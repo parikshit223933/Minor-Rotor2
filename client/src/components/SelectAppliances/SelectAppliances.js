@@ -5,6 +5,7 @@ import { ButtonSpinner } from '../';
 import { connect } from 'react-redux';
 import { selectAppliances } from '../../actions/auth';
 import JwtDecode from 'jwt-decode';
+import { Redirect } from 'react-router-dom';
 
 class SelectAppliances extends React.Component {
 	constructor(props) {
@@ -41,6 +42,10 @@ class SelectAppliances extends React.Component {
 		);
 	};
 	render() {
+		if(this.props.auth.user.hasSelectedAppliances)
+		{
+			return <Redirect to='/stats'/>
+		}
 		return (
 			<div className="select-appliances pt-5 container">
 				<div className="row bg-white intro-box">

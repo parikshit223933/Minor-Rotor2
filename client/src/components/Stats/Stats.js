@@ -1,8 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { logOut } from '../../actions/auth';
 import './Stats.scss';
 
 class Stats extends React.Component {
 	render() {
+		if(!this.props.auth.isLoggedIn)
+		{
+			return <Redirect to="/sign-in"/>
+		}
 		return (
 			<div className="stats-component pt-5 container">
 				<div className="row bg-white intro-box">
@@ -34,9 +41,23 @@ class Stats extends React.Component {
 						<div></div>
 					</div>
 				</div>
+				<div className="row mt-5">
+					<div className="col-md-6 py-3 text-right intro-box offset-md-6 bg-light">
+						<button type="button" className="btn btn-danger" onClick={()=>this.props.dispatch(logOut())}>
+							Log Out
+						</button>
+					</div>
+				</div>
 			</div>
 		);
 	}
 }
 
-export default Stats;
+const mapStateToProps=({...state})=>
+{
+	return {
+		auth:state.auth
+	}
+}
+
+export default connect(mapStateToProps)(Stats);

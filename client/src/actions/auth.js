@@ -15,6 +15,7 @@ import {
 	REFRESH_APPLIANCES_START,
 	REFRESH_APPLIANCES_SUCCESS,
 	REFRESH_APPLIANCES_FAILURE,
+	LOGOUT_SUCCESS,
 } from './actionTypes';
 import chalk from 'chalk';
 import formurlencoded from 'form-urlencoded';
@@ -242,5 +243,18 @@ export const refreshAppliances = (user_id) => {
 					dispatch(refreshAppliancesFailure(data.message));
 				}
 			});
+	};
+};
+
+export const logOutSuccess = () => {
+	return {
+		type: LOGOUT_SUCCESS,
+	};
+};
+
+export const logOut = () => {
+	return (dispatch) => {
+		localStorage.removeItem('token');
+		dispatch(logOutSuccess());
 	};
 };
