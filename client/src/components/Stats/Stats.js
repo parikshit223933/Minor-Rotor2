@@ -8,11 +8,11 @@ import './Stats.scss';
 class Stats extends React.Component {
 	render() {
 		if (
-			this.props.auth.inProgress ||
-			this.props.auth.appliances.length === 0
+			this.props.auth.inProgress
 		) {
 			return <ScreenSpinner />;
 		}
+		
 		if (!this.props.auth.isLoggedIn) {
 			return <Redirect to="/sign-in" />;
 		}
