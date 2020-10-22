@@ -6,5 +6,6 @@ export const API_URLS = {
 	getStateNames: () => `${API_ROOT}/state/get-state-names`,
 	changeState: () => `${API_ROOT}/state/change-state`,
 	getCurrentState: () => `${API_ROOT}/state/get-current-state`,
-	authenticateUser:()=>`${API_ROOT}/auth/authenticate-user`
+	authenticateUser:()=>`${API_ROOT}/auth/authenticate-user`,
+	selectAppliances:()=>`${API_ROOT}/state/select-appliances`
 };

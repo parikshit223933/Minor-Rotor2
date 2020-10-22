@@ -165,3 +165,83 @@ module.exports.getCurrentState = async (req, res) => {
 		all_states: states_in_response,
 	});
 };
+
+//req.body => {user_id, selected_appliances: []}
+module.exports.selectAppliances = async (req, res) => {
+	const { user_id, selected_appliances } = req.body;
+
+	if (!user_id) {
+		return helper.response(
+			res,
+			StatusCodes.NOT_ACCEPTABLE,
+			false,
+			'Something went wrong! Contact the administrator!'
+		);
+	}
+	if (selected_appliances.length == 0) {
+		return helper.response(
+			res,
+			StatusCodes.NOT_ACCEPTABLE,
+			false,
+			'No Appliance Selected!'
+		);
+	}
+	let appliances_response = [];
+	try {
+		let user = await User.findById(user_id).populate({
+			path: 'appliances',
+			populate: {
+				path: 'state',
+			},
+		});
+		if (user.hasSelectedAppliances) {
+			return helper.response(
+				res,
+				StatusCodes.CONFLICT,
+				false,
+				'You have already selected your appliances'
+			);
+		}
+		// user will always be found and in case user is not found, it will be handled by jwt, not by this controller.
+
+		for (let appl of selected_appliances) {
+			if (appliance_constants.allAppliances.includes(appl)) {
+				let appliance = await Appliance.create({
+					admin: user.id,
+					name: appl,
+				});
+				let state = await State.create({
+					appliance: appliance.id,
+					admin: user.id,
+				});
+				await appliance.save();
+				await state.save();
+				let new_mapping = { [appliance.name]: {} };
+
+				applianceToStateMapping[appliance.name].forEach((property) => {
+					new_mapping[appliance.name][property] = state[property];
+				});
+				appliances_response.push(new_mapping);
+			}
+		}
+		user.hasSelectedAppliances = true;
+		await user.save();
+		return await helper.response(
+			res,
+			StatusCodes.OK,
+			true,
+			'Appliances Saved!',
+			{
+				selected_appliances: appliances_response,
+				user: {
+					name: user.name,
+					email: user.email,
+					hasSelectedAppliances: user.hasSelectedAppliances,
+				},
+			}
+		);
+	} catch (error) {
+		console.log(chalk.redBright.bold('ERROR ON PLACE 1'), error);
+		return helper.internalServerError(res);
+	}
+};

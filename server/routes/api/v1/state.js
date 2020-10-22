@@ -14,5 +14,9 @@ router.post(
 	passportJWT.authenticate('jwt', { session: false }),
 	state_controller.getCurrentState
 );
-
+router.post(
+	'/select-appliances',
+	passportJWT.authenticate('jwt', { session: false }),
+	state_controller.selectAppliances
+);
 module.exports = router;

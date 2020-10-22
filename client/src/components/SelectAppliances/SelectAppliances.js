@@ -1,9 +1,45 @@
 import React from 'react';
 import './SelectAppliances.scss';
 import options from '../../assets/svgs/undraw_Preferences_re_49in.svg';
-import {ButtonSpinner} from '../';
+import { ButtonSpinner } from '../';
+import { connect } from 'react-redux';
+import { selectAppliances } from '../../actions/auth';
+import JwtDecode from 'jwt-decode';
 
 class SelectAppliances extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			appliances: [],
+		};
+	}
+	remove = (array, element) => {
+		return array.filter((e) => {
+			return e !== element;
+		});
+	};
+	handleOnChange = (appliance) => {
+		if (this.state.appliances.includes(appliance)) {
+			let new_appliances_array = this.state.appliances;
+			this.setState({
+				appliances: this.remove(new_appliances_array, appliance),
+			});
+		} else {
+			let new_appliances_array = this.state.appliances;
+			new_appliances_array.push(appliance);
+			this.setState({
+				appliances: new_appliances_array,
+			});
+		}
+	};
+	handleOnSubmit = () => {
+		this.props.dispatch(
+			selectAppliances(
+				JwtDecode(localStorage.getItem('token'))._id,
+				this.state.appliances
+			)
+		);
+	};
 	render() {
 		return (
 			<div className="select-appliances pt-5 container">
@@ -21,7 +57,10 @@ class SelectAppliances extends React.Component {
 									className="form-check-input"
 									type="checkbox"
 									id="checkBox-1"
-									value="option1"
+									value="BULB"
+									onChange={(event) =>
+										this.handleOnChange(event.target.value)
+									}
 								/>
 								<label
 									className="form-check-label"
@@ -35,7 +74,10 @@ class SelectAppliances extends React.Component {
 									className="form-check-input"
 									type="checkbox"
 									id="checkBox-2"
-									value="option2"
+									value="FAN"
+									onChange={(event) =>
+										this.handleOnChange(event.target.value)
+									}
 								/>
 								<label
 									className="form-check-label"
@@ -47,11 +89,17 @@ class SelectAppliances extends React.Component {
 						</div>
 						<div className="form-group mt-4">
 							<button
-								type="submit"
+								type="button"
 								className="btn inline btn-primary"
+								onClick={this.handleOnSubmit}
 							>
-								Submit&nbsp;&nbsp;
-								<ButtonSpinner />
+								Submit
+								{this.props.auth.inProgress && (
+									<span>&nbsp;&nbsp;</span>
+								)}
+								{this.props.auth.inProgress && (
+									<ButtonSpinner />
+								)}
 							</button>
 						</div>
 					</div>
@@ -60,4 +108,9 @@ class SelectAppliances extends React.Component {
 		);
 	}
 }
-export default SelectAppliances;
+const mapStateToProps = ({ ...state }) => {
+	return {
+		auth: state.auth,
+	};
+};
+export default connect(mapStateToProps)(SelectAppliances);

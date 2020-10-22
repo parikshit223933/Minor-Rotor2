@@ -8,6 +8,9 @@ import {
 	SIGNUP_FAILURE,
 	SIGNUP_START,
 	SIGNUP_SUCCESS,
+	SELECT_APPLIANCES_FAILURE,
+	SELECT_APPLIANCES_START,
+	SELECT_APPLIANCES_SUCCESS,
 } from '../actions/actionTypes';
 
 const initialAuthState = {
@@ -15,6 +18,9 @@ const initialAuthState = {
 	error: null,
 	isLoggedIn: false,
 	inProgress: false,
+
+	appliances: [],
+	success: null,
 };
 
 export default function auth(state = initialAuthState, action) {
@@ -79,6 +85,29 @@ export default function auth(state = initialAuthState, action) {
 				inProgress: false,
 				user: {},
 				isLoggedIn: false,
+			};
+		case SELECT_APPLIANCES_START:
+			return {
+				...state,
+				error: null,
+				success: null,
+				inProgress: true,
+			};
+		case SELECT_APPLIANCES_SUCCESS:
+			return {
+				...state,
+				error: false,
+				success: true,
+				appliances: action.appliances,
+				inProgress: false,
+				user: action.user,
+			};
+		case SELECT_APPLIANCES_FAILURE:
+			return {
+				...state,
+				error: action.error,
+				success: false,
+				inProgress: false,
 			};
 		default:
 			return state;

@@ -20,6 +20,10 @@ const user_schema = new mongoose.Schema(
 				ref: 'Appliance',
 			},
 		],
+		hasSelectedAppliances:{
+			type:Boolean,
+			default:false,
+		}
 	},
 	{
 		timestamps: true,

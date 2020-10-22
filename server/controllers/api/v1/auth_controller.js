@@ -60,6 +60,7 @@ module.exports.signUp = async (req, res) => {
 						user: {
 							name: user.name,
 							email: user.email,
+							hasSelectedAppliances: user.hasSelectedAppliances,
 						},
 					},
 				});
@@ -114,6 +115,7 @@ module.exports.signIn = async (req, res) => {
 						user: {
 							name: user.name,
 							email: user.email,
+							hasSelectedAppliances: user.hasSelectedAppliances,
 						},
 					},
 				});
@@ -132,9 +134,14 @@ module.exports.signIn = async (req, res) => {
 };
 // req.body => {name, email, _id}
 module.exports.authenticateUser = async (req, res) => {
+	const { name, email, _id } = req.body;
+	let user = await User.findById(_id);
+
 	return helper.response(res, StatusCodes.OK, true, 'Authenticated', {
-		name: req.body.name,
-		email: req.body.email,
-		_id: req.body._id,
+		user: {
+			name,
+			email,
+			hasSelectedAppliances: user.hasSelectedAppliances,
+		},
 	});
 };

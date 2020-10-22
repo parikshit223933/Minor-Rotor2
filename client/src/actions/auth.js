@@ -1,4 +1,4 @@
-import { API_ROOT, API_URLS } from '../helpers/urls';
+import { API_URLS } from '../helpers/urls';
 import {
 	AUTHENTICATE_USER_FAILURE,
 	AUTHENTICATE_USER_START,
@@ -9,6 +9,9 @@ import {
 	SIGNUP_FAILURE,
 	SIGNUP_START,
 	SIGNUP_SUCCESS,
+	SELECT_APPLIANCES_FAILURE,
+	SELECT_APPLIANCES_START,
+	SELECT_APPLIANCES_SUCCESS,
 } from './actionTypes';
 import chalk from 'chalk';
 import formurlencoded from 'form-urlencoded';
@@ -111,11 +114,13 @@ export const authenticateUserStart = () => {
 export const authenticateUserSuccess = (user) => {
 	return {
 		type: AUTHENTICATE_USER_SUCCESS,
+		user,
 	};
 };
 export const authenticateUserFailure = (error) => {
 	return {
 		type: AUTHENTICATE_USER_FAILURE,
+		error,
 	};
 };
 export const authenticateUser = (email, name, _id) => {
@@ -137,11 +142,56 @@ export const authenticateUser = (email, name, _id) => {
 					return;
 				}
 			})
-			.catch(error=>
-				{
-					localStorage.removeItem('token');
-					dispatch(authenticateUserFailure('Please login again!'));
-					console.log('Invalid token, Unauthorized!');
-				})
+			.catch((error) => {
+				localStorage.removeItem('token');
+				dispatch(authenticateUserFailure('Please login again!'));
+				console.log('Invalid token, Unauthorized!');
+			});
+	};
+};
+
+export const selectAppliancesStart = () => {
+	return {
+		type: SELECT_APPLIANCES_START,
+	};
+};
+export const selectAppliancesSuccess = (appliances, user) => {
+	return {
+		type: SELECT_APPLIANCES_SUCCESS,
+		appliances,
+		user,
+	};
+};
+export const selectAppliancesFailure = (error) => {
+	return {
+		type: SELECT_APPLIANCES_FAILURE,
+		error,
+	};
+};
+export const selectAppliances = (user_id, appliances) => {
+	return (dispatch) => {
+		dispatch(selectAppliancesStart());
+		let url = API_URLS.selectAppliances();
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+			body: formurlencoded({ user_id, selected_appliances: appliances }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.success) {
+					dispatch(
+						selectAppliancesSuccess(
+							data.data.selected_appliances,
+							data.data.user
+						)
+					);
+					return;
+				}
+				dispatch(selectAppliancesFailure(data.message));
+			});
 	};
 };
