@@ -29,6 +29,7 @@ export default function auth(state = initialAuthState, action) {
 			return {
 				...state,
 				inProgress: true,
+				success: null,
 			};
 		case LOGIN_SUCCESS:
 			return {
@@ -36,6 +37,7 @@ export default function auth(state = initialAuthState, action) {
 				user: action.user,
 				inProgress: false,
 				isLoggedIn: true,
+				success: true,
 			};
 		case LOGIN_FAILURE:
 			return {
@@ -43,11 +45,13 @@ export default function auth(state = initialAuthState, action) {
 				error: action.error,
 				isLoggedIn: false,
 				inProgress: false,
+				success: false,
 			};
 		case SIGNUP_START:
 			return {
 				...state,
 				inProgress: true,
+				success: null,
 			};
 		case SIGNUP_SUCCESS:
 			return {
@@ -55,6 +59,7 @@ export default function auth(state = initialAuthState, action) {
 				user: action.user,
 				inProgress: false,
 				isLoggedIn: true,
+				success: true,
 			};
 		case SIGNUP_FAILURE:
 			return {
@@ -62,6 +67,7 @@ export default function auth(state = initialAuthState, action) {
 				error: action.error,
 				isLoggedIn: false,
 				inProgress: false,
+				success: false,
 			};
 		case AUTHENTICATE_USER_START:
 			return {
@@ -69,6 +75,7 @@ export default function auth(state = initialAuthState, action) {
 				isLoggedIn: false,
 				inProgress: true,
 				error: null,
+				success: null,
 			};
 		case AUTHENTICATE_USER_SUCCESS:
 			return {
@@ -77,6 +84,7 @@ export default function auth(state = initialAuthState, action) {
 				inProgress: false,
 				error: null,
 				user: action.user,
+				success: true,
 			};
 		case AUTHENTICATE_USER_FAILURE:
 			return {
@@ -85,6 +93,7 @@ export default function auth(state = initialAuthState, action) {
 				inProgress: false,
 				user: {},
 				isLoggedIn: false,
+				success: false,
 			};
 		case SELECT_APPLIANCES_START:
 			return {
