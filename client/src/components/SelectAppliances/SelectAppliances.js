@@ -1,7 +1,7 @@
 import React from 'react';
 import './SelectAppliances.scss';
 import options from '../../assets/svgs/undraw_Preferences_re_49in.svg';
-import { ButtonSpinner } from '../';
+import { ButtonSpinner, ScreenSpinner } from '../';
 import { connect } from 'react-redux';
 import { selectAppliances } from '../../actions/auth';
 import JwtDecode from 'jwt-decode';
@@ -42,6 +42,10 @@ class SelectAppliances extends React.Component {
 		);
 	};
 	render() {
+		if(this.props.auth.inProgress)
+		{
+			return <ScreenSpinner/>
+		}
 		if(this.props.auth.user.hasSelectedAppliances)
 		{
 			return <Redirect to='/stats'/>

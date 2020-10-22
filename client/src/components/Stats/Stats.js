@@ -2,10 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { logOut } from '../../actions/auth';
+import {ScreenSpinner} from '../';
 import './Stats.scss';
 
 class Stats extends React.Component {
 	render() {
+		if(this.props.auth.inProgress)
+		{
+			return <ScreenSpinner/>
+		}
 		if(!this.props.auth.isLoggedIn)
 		{
 			return <Redirect to="/sign-in"/>

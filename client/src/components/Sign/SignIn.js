@@ -1,6 +1,6 @@
 import React from 'react';
 import './SignIn.scss';
-import { ButtonSpinner } from '../';
+import { ButtonSpinner, ScreenSpinner } from '../';
 import { Link } from 'react-router-dom';
 import { login } from '../../actions/auth';
 import chalk from 'chalk';
@@ -27,6 +27,10 @@ class SignIn extends React.Component {
 		this.props.dispatch(login(this.state.email, this.state.password));
 	};
 	render() {
+		if(this.props.auth.inProgress)
+		{
+			return <ScreenSpinner/>
+		}
 		return (
 			<div className="sign-in">
 				<div className="sign-in-text font-25 pb-4 google-font">
