@@ -5,7 +5,7 @@ export const API_URLS = {
 	signUp: () => `${API_ROOT}/auth/sign-up`,
 	getStateNames: () => `${API_ROOT}/state/get-state-names`,
 	changeState: () => `${API_ROOT}/state/change-state`,
-	getCurrentState: () => `${API_ROOT}/state/get-current-state`,
+	getAllApplianceStates: () => `${API_ROOT}/state/get-all-appliance-states`,
 	authenticateUser:()=>`${API_ROOT}/auth/authenticate-user`,
 	selectAppliances:()=>`${API_ROOT}/state/select-appliances`
 };

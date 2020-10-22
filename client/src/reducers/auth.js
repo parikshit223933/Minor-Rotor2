@@ -11,6 +11,9 @@ import {
 	SELECT_APPLIANCES_FAILURE,
 	SELECT_APPLIANCES_START,
 	SELECT_APPLIANCES_SUCCESS,
+	REFRESH_APPLIANCES_START,
+	REFRESH_APPLIANCES_SUCCESS,
+	REFRESH_APPLIANCES_FAILURE,
 } from '../actions/actionTypes';
 
 const initialAuthState = {
@@ -116,6 +119,28 @@ export default function auth(state = initialAuthState, action) {
 				...state,
 				error: action.error,
 				success: false,
+				inProgress: false,
+			};
+		case REFRESH_APPLIANCES_START:
+			return {
+				...state,
+				error: null,
+				success: null,
+				inProgress: true,
+			};
+		case REFRESH_APPLIANCES_SUCCESS:
+			return {
+				...state,
+				success: true,
+				user: action.user,
+				appliances: action.appliances,
+				inProgress: false,
+			};
+		case REFRESH_APPLIANCES_FAILURE:
+			return {
+				...state,
+				success: false,
+				error: action.error,
 				inProgress: false,
 			};
 		default:

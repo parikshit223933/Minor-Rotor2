@@ -12,6 +12,9 @@ import {
 	SELECT_APPLIANCES_FAILURE,
 	SELECT_APPLIANCES_START,
 	SELECT_APPLIANCES_SUCCESS,
+	REFRESH_APPLIANCES_START,
+	REFRESH_APPLIANCES_SUCCESS,
+	REFRESH_APPLIANCES_FAILURE,
 } from './actionTypes';
 import chalk from 'chalk';
 import formurlencoded from 'form-urlencoded';
@@ -192,6 +195,52 @@ export const selectAppliances = (user_id, appliances) => {
 					return;
 				}
 				dispatch(selectAppliancesFailure(data.message));
+			});
+	};
+};
+
+export const refreshAppliancesStart = () => {
+	return {
+		type: REFRESH_APPLIANCES_START,
+	};
+};
+export const refreshAppliancesSuccess = (user, appliances) => {
+	return {
+		type: REFRESH_APPLIANCES_SUCCESS,
+		user,
+		appliances,
+	};
+};
+export const refreshAppliancesFailure = (error) => {
+	return {
+		type: REFRESH_APPLIANCES_FAILURE,
+		error,
+	};
+};
+export const refreshAppliances = (user_id) => {
+	return (dispatch) => {
+		dispatch(refreshAppliancesStart());
+		let url = API_URLS.getAllApplianceStates();
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+			body: formurlencoded({ user_id }),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.success) {
+					dispatch(
+						refreshAppliancesSuccess(
+							data.data.user,
+							data.data.selected_appliances
+						)
+					);
+				} else {
+					dispatch(refreshAppliancesFailure(data.message));
+				}
 			});
 	};
 };

@@ -10,9 +10,9 @@ router.post(
 	state_controller.changeState
 );
 router.post(
-	'/get-current-state',
+	'/get-all-appliance-states',
 	passportJWT.authenticate('jwt', { session: false }),
-	state_controller.getCurrentState
+	state_controller.getAllApplianceStatesForThisUser
 );
 router.post(
 	'/select-appliances',

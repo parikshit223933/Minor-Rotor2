@@ -116,56 +116,6 @@ module.exports.changeState = async (req, res) => {
 	}
 };
 
-// get current state of the appliance for the requesting user
-// req.body => {email, appliance_name}
-module.exports.getCurrentState = async (req, res) => {
-	const email = req.body.email;
-	const appliance_name = req.body.appliance_name;
-
-	if (!email || !appliance_name) {
-		return helper.response(
-			res,
-			StatusCodes.NOT_ACCEPTABLE,
-			false,
-			'No Appliance input!'
-		);
-	}
-
-	let user = await User.findOne({ email });
-	if (!user || !appliance_constants.allAppliances.includes(appliance_name)) {
-		return helper.response(
-			res,
-			StatusCodes.NOT_FOUND,
-			false,
-			'User or appliance is not found!'
-		);
-	}
-	let appliance = await Appliance.findOne({ name: appliance_name });
-	let state = await State.findOne({
-		admin: user.id,
-		appliance: appliance.id,
-	});
-
-	if (!state) {
-		return helper.response(
-			res,
-			StatusCodes.BAD_REQUEST,
-			false,
-			'This state does not exist!'
-		);
-	}
-
-	let states_in_response = applianceToStateMapping[appliance_name].map(
-		(state_name) => {
-			return { state_name: state[state_name] };
-		}
-	);
-
-	return helper.response(res, StatusCodes.OK, true, 'current states', {
-		all_states: states_in_response,
-	});
-};
-
 //req.body => {user_id, selected_appliances: []}
 module.exports.selectAppliances = async (req, res) => {
 	const { user_id, selected_appliances } = req.body;
@@ -214,6 +164,8 @@ module.exports.selectAppliances = async (req, res) => {
 					appliance: appliance.id,
 					admin: user.id,
 				});
+				appliance.state=state.id;
+				user.appliances.push(appliance.id);
 				await appliance.save();
 				await state.save();
 				let new_mapping = { [appliance.name]: {} };
@@ -242,6 +194,76 @@ module.exports.selectAppliances = async (req, res) => {
 		);
 	} catch (error) {
 		console.log(chalk.redBright.bold('ERROR ON PLACE 1'), error);
+		return helper.internalServerError(res);
+	}
+};
+
+// get current state of the appliance for the requesting user
+// req.body => {user_id}
+module.exports.getAllApplianceStatesForThisUser = async (req, res) => {
+	const { user_id } = req.body;
+	if (!user_id) {
+		return helper.response(
+			res,
+			StatusCodes.CONFLICT,
+			false,
+			'Please login again!'
+		);
+	}
+	try {
+		let user = await User.findById(user_id).populate({
+			path: 'appliances',
+			populate: {
+				path: 'state',
+			},
+		});
+		if (!user) {
+			return helper.response(
+				res,
+				StatusCodes.CONFLICT,
+				false,
+				'Please login again!'
+			);
+		}
+
+		if (!user.hasSelectedAppliances) {
+			return helper.response(
+				res,
+				StatusCodes.OK,
+				true,
+				'Appliance States',
+				{
+					user: {
+						name: user.name,
+						email: user.email,
+						hasSelectedAppliances: user.hasSelectedAppliances,
+					},
+					selected_appliances: [],
+				}
+			);
+		}
+		let appliances_response = [];
+		for (let appl of user.appliances) {
+			let appliance = appl;
+			let state = appl.state;
+			let new_mapping = { [appliance.name]: {} };
+
+			applianceToStateMapping[appliance.name].forEach((property) => {
+				new_mapping[appliance.name][property] = state[property];
+			});
+			appliances_response.push(new_mapping);
+		}
+
+		return helper.response(res, StatusCodes.OK, true, 'Appliance states', {
+			user: {
+				name: user.name,
+				email: user.email,
+				hasSelectedAppliances: user.hasSelectedAppliances,
+			},
+			selected_appliances: appliances_response,
+		});
+	} catch (error) {
+		console.log(chalk.redBright.bold('There was an error!'), error);
 		return helper.internalServerError(res);
 	}
 };
