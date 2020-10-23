@@ -14,6 +14,20 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
   }
+  a{
+    color: #ffc662;
+    text-decoration: none;
+  }
+  nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #ffc662;
+    font-weight: bold;
+    font-size: 23px;
+    // font-style: italic;
+    font-family: "Shadows Into Light", cursive;
+  }
 .datacontainer{
     width: 90%;
     left: 5%;
@@ -64,6 +78,7 @@ body{
             }
             .appliance{
               padding: 5px 0px;
+              font-weight: bold;
               // border-top: 0.1px solid #ffc662;
               // border-bottom: 0.1px solid #ffc662;
 
