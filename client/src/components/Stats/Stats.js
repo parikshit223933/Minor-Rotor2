@@ -1,11 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { logOut } from '../../actions/auth';
+import { changeState, logOut } from '../../actions/auth';
 import { ScreenSpinner } from '../';
 import './Stats.scss';
 
 class Stats extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { updated_states: {} };
+	}
+	updateState(appliance, state_name, new_value) {
+		this.setState({
+			updated_states: {
+				...this.state.updated_states,
+				[appliance]: {
+					...this.state.updated_states[appliance],
+					[state_name]: new_value,
+				},
+			},
+		});
+	}
 	render() {
 		if (this.props.auth.inProgress) {
 			return <ScreenSpinner />;
@@ -112,6 +127,19 @@ class Stats extends React.Component {
 																	defaultChecked={
 																		false
 																	}
+																	onChange={(
+																		event
+																	) =>
+																		this.updateState(
+																			Object.keys(
+																				appl
+																			)[0],
+																			property,
+																			event
+																				.target
+																				.checked
+																		)
+																	}
 																/>
 																<span className="slider round"></span>
 															</label>
@@ -127,18 +155,44 @@ class Stats extends React.Component {
 																	defaultChecked={
 																		true
 																	}
+																	onChange={(
+																		event
+																	) =>
+																		this.updateState(
+																			Object.keys(
+																				appl
+																			)[0],
+																			property,
+																			event
+																				.target
+																				.checked
+																		)
+																	}
 																/>
 																<span className="slider round"></span>
 															</label>
 														)
 													) : (
-														<div class="form-group mb-0">
+														<div className="form-group mb-0">
 															<input
 																type="range"
-																class="form-control-range"
+																className="form-control-range"
 																min={0}
 																max={100}
 																step={10}
+																onChange={(
+																	event
+																) =>
+																	this.updateState(
+																		Object.keys(
+																			appl
+																		)[0],
+																		property,
+																		event
+																			.target
+																			.value
+																	)
+																}
 																defaultValue={
 																	appl[
 																		Object.keys(
@@ -161,10 +215,18 @@ class Stats extends React.Component {
 				</div>
 				<div className="row mt-5">
 					<div className="col-md-6 py-3 d-flex justify-content-between intro-box offset-md-6 bg-light">
-					<button
+						<button
 							type="button"
 							className="btn btn-success"
-							onClick={() => this.props.dispatch(logOut())}
+							onClick={() =>
+								this.props.dispatch(
+									changeState({
+										new_appliance_states: this.state
+											.updated_states,
+										email: this.props.auth.user.email,
+									})
+								)
+							}
 						>
 							Update
 						</button>
