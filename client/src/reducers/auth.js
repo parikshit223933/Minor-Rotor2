@@ -15,6 +15,9 @@ import {
 	REFRESH_APPLIANCES_SUCCESS,
 	REFRESH_APPLIANCES_FAILURE,
 	LOGOUT_SUCCESS,
+	UPDATE_STATE_START,
+	UPDATE_STATE_SUCCESS,
+	UPDATE_STATE_FAILURE,
 } from '../actions/actionTypes';
 
 const initialAuthState = {
@@ -154,6 +157,26 @@ export default function auth(state = initialAuthState, action) {
 				appliances: [],
 				success: true,
 			};
+		case UPDATE_STATE_START:
+				return{
+					...state,
+					inProgress:true,
+					error:false,
+					success:false,
+				}
+		case UPDATE_STATE_SUCCESS:
+				return{
+					...state,
+					inProgress:false,
+					success:true,
+					appliances:action.appliances
+				}
+		case UPDATE_STATE_FAILURE:
+				return{
+					...state,
+					inProgress:false,
+					error:action.error,
+				}
 		default:
 			return state;
 	}
