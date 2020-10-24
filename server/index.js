@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const db = require('./config/mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const sassMiddleware = require('node-sass-middleware');
 const env=require('./environment/environment');
 const sessionName = env.sessionName; // to be changed at production
 const sessionSecret = env.sessionSecret; // to be changed at production
