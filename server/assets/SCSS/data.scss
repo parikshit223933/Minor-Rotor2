@@ -31,6 +31,7 @@ body{
     font-size: 23px;
     // font-style: italic;
     font-family: "Shadows Into Light", cursive;
+    z-index: 5;
     div{
       padding: 10px 20px;
       transition: 0.5s all;
@@ -57,7 +58,7 @@ body{
     box-shadow:inset 0px 0px 10px black;
     // background-color: #fbffbf;
      background-color: #fffaf1;
-     z-index: -1;
+    //  z-index: -1;
      table{
 
       width: 100%;

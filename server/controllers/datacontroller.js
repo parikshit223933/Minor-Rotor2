@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const States = require('../models/State');
 const Appliances = require('../models/Appliance');
-
+const constants = require('../constants/appliance_to_state_mapping')
 module.exports.AllData = async function (req, res) {
 	try {
 		let states = await States.find({})
@@ -25,6 +25,7 @@ module.exports.AllData = async function (req, res) {
 			title: 'Automation|DATA',
 			appliances: appliances,
 			all_users: users,
+			mappings:constants,
 			states:states
 		});
 	} catch (err) {
