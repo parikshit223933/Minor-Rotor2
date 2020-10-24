@@ -12,6 +12,6 @@ for(let i=0;i<couple_length;i++){
    }
 }
 var navz = document.getElementsByTagName("nav");
-window.onscroll=()=>{
-    if()
-}
+// window.onscroll=()=>{
+//     if()
+// }

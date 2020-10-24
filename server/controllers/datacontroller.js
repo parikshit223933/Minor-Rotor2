@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const States = require('../models/State');
 const Appliances = require('../models/Appliance');
-
+const constants = require('../constants/appliance_to_state_mapping')
 module.exports.AllData = async function (req, res) {
 	try {
 		// console.log(req.cookies);
@@ -30,12 +30,13 @@ module.exports.AllData = async function (req, res) {
             path:'state',
             
         });
-		console.log('---------users--------',states)
+		console.log('---------users--------',constants.FAN[0])
 		// console.log('-----appliances---',appliances)
 		return res.render('data', {
 			title: 'Automation|DATA',
 			appliances: appliances,
 			all_users: users,
+			mappings:constants,
 			states:states
 		});
 	} catch (err) {

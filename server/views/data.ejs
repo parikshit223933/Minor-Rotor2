@@ -10,6 +10,7 @@
      <nav><a href=""><div class="logo">AUTOMATE</div></a>
         <a href=""><div class="refresh"><i class="fas fa-redo-alt"></i> REFRESH</div></a>
     </nav>
+
       <div class="datacontainer">
         <table>
           <tr class="col">
@@ -51,26 +52,21 @@
                        <%if(appliance.id==state.appliance){%>
                      
                             <div class="states">
-                              <%if(appliance.name=='BULB'){%>
+                              <%if(mappings[appliance.name]){%>
                                 <div class="state">
                                   <div class="s1"><span> Turned </span>
-                                    <%if(state.isTurnedOn){%>
+                                    <!-- <%=mappings[appliance.name][0]%> -->
+                                    <%if(state[mappings[appliance.name][0]]){%>
                                     <span style="color: green; font-weight: bold;" > ON </span>
                                     <%}else{%>
                                       <span style="color: darkred; font-weight: bold;">OFF</span>
                                       <%}%></div>
-                                 <div class="s2"><span>Intensity  </span> <span><%=state.intensity%></span></div>
+                                 <div class="s2"><span><%=mappings[appliance.name][1]%>  </span> <span>
+                                   <%=state[mappings[appliance.name][1]]%>
+                                  </span></div>
                                 </div>
-                                <%}else{%>
-                                  <div class="state">
-                                    <div class="s1"><span> Turned</span>  <%if(state.isTurnedOn){%>
-                                      <span style="color: green; font-weight: bold;" > ON </span>
-                                      <%}else{%>
-                                        <span style="color: darkred; font-weight: bold;">OFF</span>
-                                        <%}%></div>
-                                   <div class="s2"><span> speed  </span> <span><%=state.speed%></span></div>
-                                </div>
-                                  <%}%>
+                                <%}%>
+                                  
                                 
                             </div>
                         
