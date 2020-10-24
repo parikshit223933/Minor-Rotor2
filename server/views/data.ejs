@@ -7,145 +7,94 @@
         <link rel="stylesheet" href="/CSS/data.css">
     </head>
     <body>
+     <nav><a href=""><div class="logo">AUTOMATE</div></a>
+        <a href=""><div class="refresh"><i class="fas fa-redo-alt"></i> REFRESH</div></a>
+    </nav>
+
       <div class="datacontainer">
         <table>
           <tr class="col">
             <th><div class="head">#</div></th>
-             <div class="zom">
+            
               <th><div class="head"><i class="fas fa-envelope"></i> User Email</div></th>
               <th><div class="head"><i class="fas fa-lightbulb"></i> Available Appliances</div>
               </th>
               <th><div class="head"><i class="fab fa-twitch"></i> Current Status</div>
               </th>
-             </div>
+          
           </tr>
 
           <%for(var i=0; i < all_users.length ; i++){%>
           <tr class="col">
-            <td><span class="sNo"><%=i+1%></span> </td>
-             <div class="zom">
+              <td><span class="sNo"><%=i+1%></span> </td>
+            
               <td> <%=all_users[i].email%></td>
-              <td> <%for(appliance of appliances){%>
-                <%if(all_users[i].id==appliance.admin.id){%>
-                 <div class="appliance">
-                     <%=appliance.name%>
+
+              <td>
+                <div class="couple">
+                  <%for(let j =0 ; j< appliances.length ; j++){%>
+                    <%if(all_users[i].id==appliances[j].admin.id){%>
+                        <div class="appliance">
+                           <%=appliances[j].name%>    
+                          </div>
                           
-                      </div>
-                      <!-- <div class="bz" style="width: auto; height: 0.1px; background-color:  #ffc662;"></div> -->
+                          <%}%>
                       <%}%>
-                  <%}%>
+                </div>
             </td>
-              <td><%for(appliance of appliances){%>
+              <td>
+                <div class="couple">
+                <%for(appliance of appliances){%>
   
                 <%if(all_users[i].id==appliance.admin.id){%>
-                <div class="appliance">
-                   
-                  <!-- <div class="states"> -->
+                
                     <%for(state of states){%>
                        <%if(appliance.id==state.appliance){%>
+                     
                             <div class="states">
-                              <%if(appliance.name=='BULB'){%>
+                              <%if(mappings[appliance.name]){%>
                                 <div class="state">
-                                  <div class="s1"><span> Is Turned On :</span> <%=state.isTurnedOn%></div>
-                                 <div class="s2"><span>Intensity:</span> <%=state.intensity%></div>
-                                </div>
-                                <%}else{%>
-                                  <div class="state">
-                                    <div class="s1"><span> Is Turned On :</span> <%=state.isTurnedOn%></div>
-                                   <div class="s2"><span> speed:</span> <%=state.speed%></div>
-                                </div>
-                                  <%}%>
+                                  <%for(var s = 0 ; s < mappings[appliance.name].length ; s++){%>
+                                    <%if(s==0){%>
+                                      <div class="s1">
+                                      <%if(state[mappings[appliance.name][s]]){%>
+                                      
+                                        <span> Turned </span>
+                                       <span style="color: green; font-weight: bold;" > ON </span>
+                                    <%}else if(!state[mappings[appliance.name][s]]){%>
+                                      <span> Turned </span>
+                                      <span style="color: darkred; font-weight: bold;">OFF</span>
+                                   
+                                      <%}%>
+                                    </div>
+                                    <%}%>
+                                  <%if(s>0){%>
+                                    <div class="s2"><span><%=mappings[appliance.name][s]%>  </span> <span>
+                                      <%=state[mappings[appliance.name][s]]%>
+                                       </span></div>
+                                   
+                                    <%}%>
+                                <%}%>
+                              </div>
+                                <%}%>
+                                  
+                                
                             </div>
+                        
                         <%}%>
                     <%}%>
-                   
-                <!-- </div> -->
                 <%}%>
-            <%}%></td>
-             </div>
+            <%}%>
+                           
+          </div>
+          </td>
+          
           </tr>
           <%}%>
 
         </table>
-
-
-        <!-- <div class="col" style="width: 4%;">
-            <div class="head">#</div>
-            <div class="list">
-            <%for(var i=0; i < all_users.length ; i++){%>
-                
-                <div class="emailaddress">
-                  <span class="sNo"><%=i+1%></span> 
-         
-                </div>
-                  
-              <%}%>
-              </div>
-
-        </div> -->
-         <!-- <div class="col usermail">
-            <div class="head"><i class="fas fa-envelope"></i> User Email</div>
-            <div class="list email">
-                <%for(var i=0; i < all_users.length ; i++){%>
-                    
-                    <div class="emailaddress">
-                    
-                        <%=all_users[i].email%>
-             
-                    </div>
-                      
-                  <%}%>
-            </div>
-         </div> -->
-         <!-- <div class="col available-appliances">
-            <div class="head"><i class="fas fa-lightbulb"></i> Available Appliances</div>
-            <div class="list appliances">
-                <%for(user of all_users){%>
-                    
-                     <div class="user-appliances">
-                        <%for(appliance of appliances){%>
-                           <%if(user.id==appliance.admin.id){%>
-                            <div class="appliance">
-                                <%=appliance.name%>
-                                
-                            </div>
-                            <%}%>
-                        <%}%>
-                     </div>
-             
-                  <%}%>
-            </div>
-         </div> -->
-         <!-- <div class="col current-status">
-            <div class="head"><i class="fab fa-twitch"></i> Current Status</div>
-            <div class="list email">
-                <%for(user of all_users){%>
-                       <%for(appliance of appliances){%>
-
-                           <div class="appliance">
-                               <div class="applianceName">
-                                <%=appliance.name%> -
-                               </div>
-                              <div class="states">
-                                <%for(state of states){%>
-                                    <div class="state">
-                                   isTurnedOn:  <%=state.isTurnedOn%>
-                                    </div>
-                                   <%if(state.speed){%>
-                                  <div class="state"> Speed : <%=state.speed%></div>
-                                   <%}else{%>
-                                  <div class="state"> 
-                                     Intencity:  <%=state.intensity%></div>
-                                   <%}%>
-                                <%}%>
-                              </div>
-                           </div>
-
-                       <%}%>
-                 <%}%>
-            </div>
-         </div>
-            -->
       </div>
+
+      <script src="/js/data.js"></script>
     </body>
 </html>
