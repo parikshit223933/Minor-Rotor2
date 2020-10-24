@@ -1,4 +1,4 @@
-export const API_ROOT = 'http://localhost:8000/api/v1';
+export const API_ROOT = 'http://18.189.1.174:8000/api/v1';
 
 export const API_URLS = {
 	login: () => `${API_ROOT}/auth/sign-in`,
