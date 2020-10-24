@@ -1,100 +1,136 @@
 <html>
-    <head>
-        <title>
-            <%=title%>
-        </title>
-        <script src="https://kit.fontawesome.com/af827e2ea3.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="/CSS/data.css">
-    </head>
-    <body>
-     <nav><a href=""><div class="logo">AUTOMATE</div></a>
-        <a href=""><div class="refresh"><i class="fas fa-redo-alt"></i> REFRESH</div></a>
-    </nav>
+	<head>
+		<title><%=title%></title>
+		<script
+			src="https://kit.fontawesome.com/af827e2ea3.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="/CSS/data.css" />
+	</head>
+	<body>
+		<nav>
+			<a href=""><div class="logo">AUTOMATE</div></a>
+			<a href=""
+				><div class="refresh">
+					<i class="fas fa-redo-alt"></i> REFRESH
+				</div></a
+			>
+		</nav>
 
-      <div class="datacontainer">
-        <table>
-          <tr class="col">
-            <th><div class="head">#</div></th>
-            
-              <th><div class="head"><i class="fas fa-envelope"></i> User Email</div></th>
-              <th><div class="head"><i class="fas fa-lightbulb"></i> Available Appliances</div>
-              </th>
-              <th><div class="head"><i class="fab fa-twitch"></i> Current Status</div>
-              </th>
-          
-          </tr>
+		<div class="datacontainer">
+			<table>
+				<tr class="col">
+					<th><div class="head">#</div></th>
 
-          <%for(var i=0; i < all_users.length ; i++){%>
-          <tr class="col">
-              <td><span class="sNo"><%=i+1%></span> </td>
-            
-              <td> <%=all_users[i].email%></td>
+					<th>
+						<div class="head">
+							<i class="fas fa-envelope"></i> User Email
+						</div>
+					</th>
+					<th>
+						<div class="head">
+							<i class="fas fa-lightbulb"></i> Available
+							Appliances
+						</div>
+					</th>
+					<th>
+						<div class="head">
+							<i class="fab fa-twitch"></i> Current Status
+						</div>
+					</th>
+				</tr>
 
-              <td>
-                <div class="couple">
-                  <%for(let j =0 ; j< appliances.length ; j++){%>
-                    <%if(all_users[i].id==appliances[j].admin.id){%>
-                        <div class="appliance">
-                           <%=appliances[j].name%>    
-                          </div>
-                          
-                          <%}%>
-                      <%}%>
-                </div>
-            </td>
-              <td>
-                <div class="couple">
-                <%for(appliance of appliances){%>
-  
-                <%if(all_users[i].id==appliance.admin.id){%>
-                
-                    <%for(state of states){%>
-                       <%if(appliance.id==state.appliance){%>
-                     
-                            <div class="states">
-                              <%if(mappings[appliance.name]){%>
-                                <div class="state">
-                                  <%for(var s = 0 ; s < mappings[appliance.name].length ; s++){%>
-                                    <%if(s==0){%>
-                                      <div class="s1">
-                                      <%if(state[mappings[appliance.name][s]]){%>
-                                      
-                                        <span> Turned </span>
-                                       <span style="color: green; font-weight: bold;" > ON </span>
-                                    <%}else if(!state[mappings[appliance.name][s]]){%>
-                                      <span> Turned </span>
-                                      <span style="color: darkred; font-weight: bold;">OFF</span>
-                                   
-                                      <%}%>
-                                    </div>
-                                    <%}%>
-                                  <%if(s>0){%>
-                                    <div class="s2"><span><%=mappings[appliance.name][s]%>  </span> <span>
-                                      <%=state[mappings[appliance.name][s]]%>
-                                       </span></div>
-                                   
-                                    <%}%>
-                                <%}%>
-                              </div>
-                                <%}%>
-                                  
-                                
-                            </div>
-                        
-                        <%}%>
-                    <%}%>
-                <%}%>
-            <%}%>
-                           
-          </div>
-          </td>
-          
-          </tr>
-          <%}%>
+				<%for(var i=0; i < all_users.length ; i++){%>
+				<tr class="col">
+					<td><span class="sNo"><%=i+1%></span></td>
 
-        </table>
-      </div>
+					<td><%=all_users[i].email%></td>
 
-      <script src="/js/data.js"></script>
-    </body>
+					<td>
+						<div class="couple">
+							<%for(let j =0 ; j< appliances.length ; j++){%>
+							<%if(all_users[i].id==appliances[j].admin.id){%>
+							<div class="appliance"><%=appliances[j].name%></div>
+
+							<%}%> <%}%>
+						</div>
+					</td>
+					<td>
+						<div class="couple">
+							<%for(appliance of appliances){%>
+							<%if(all_users[i].id==appliance.admin.id){%>
+							<%for(state of states){%>
+							<%if(appliance.id==state.appliance){%>
+
+							<div class="states">
+								<%if(mappings[appliance.name]){%>
+								<div class="state">
+									<%for(var s = 0 ; s <
+									mappings[appliance.name].length ; s++){%>
+									<%if(s==0){%>
+									<div class="s1">
+										<%if(state[mappings[appliance.name][s]]){%>
+
+										<span> Turned </span>
+										<span
+											style="
+												color: green;
+												font-weight: bold;
+											"
+										>
+											ON
+										</span>
+										<%}else
+										if(!state[mappings[appliance.name][s]]){%>
+										<span> Turned </span>
+										<span
+											style="
+												color: darkred;
+												font-weight: bold;
+											"
+											>OFF</span
+										>
+
+										<%}%>
+									</div>
+									<%}%> <%if(s>0){%>
+									<div class="s2">
+										<span
+											><%=mappings[appliance.name][s]%>
+										</span>
+										<span>
+											<%=state[mappings[appliance.name][s]]%>
+										</span>
+									</div>
+
+									<%}%> <%}%>
+								</div>
+								<%}%>
+							</div>
+
+							<%}%> <%}%> <%}%> <%}%>
+						</div>
+					</td>
+				</tr>
+				<%}%>
+			</table>
+		</div>
+    <script>
+
+      var couple = document.getElementsByClassName('couple');
+      console.log(couple);
+      const couple_length = couple.length;
+      for (let i = 0; i < couple_length; i++) {
+        console.log(couple[i].children);
+        for (let j = 0; j < couple[i].childElementCount; j++) {
+          if (j < couple[i].childElementCount - 1) {
+            couple[i].children[j].style.borderBottom =
+              '0.1px solid #ffc662';
+          }
+        }
+      }
+      var navz = document.getElementsByTagName('nav');
+    </script>
+	</body>
+
 </html>

@@ -12,16 +12,6 @@ const sassMiddleware = require('node-sass-middleware');
 const sessionName = 'something'; // to be changed at production
 const sessionSecret = 'something'; // to be changed at production
 
-app.use(
-	sassMiddleware({
-		src: './assets/SCSS',
-		dest: './assets/CSS',
-		debug: true,
-		outputStyle: 'extended',
-		prefix: '/CSS',
-	})
-);
-
 app.use(cors()); // enable all
 app.use(express.static('./assets'));
 app.use(cookieParser());
