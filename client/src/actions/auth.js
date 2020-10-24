@@ -16,6 +16,9 @@ import {
 	REFRESH_APPLIANCES_SUCCESS,
 	REFRESH_APPLIANCES_FAILURE,
 	LOGOUT_SUCCESS,
+	UPDATE_STATE_START,
+	UPDATE_STATE_SUCCESS,
+	UPDATE_STATE_FAILURE,
 } from './actionTypes';
 import chalk from 'chalk';
 import formurlencoded from 'form-urlencoded';
@@ -150,12 +153,10 @@ export const authenticateUser = (email, name, _id) => {
 				if (data.success) {
 					dispatch(authenticateUserSuccess(data.data.user));
 					return;
-				}
-				else
-				{
+				} else {
 					dispatch(authenticateUserFailure('authentication failed!'));
 				}
-			})
+			});
 	};
 };
 
@@ -261,5 +262,45 @@ export const logOut = () => {
 	return (dispatch) => {
 		localStorage.removeItem('token');
 		dispatch(logOutSuccess());
+	};
+};
+
+export const updateStateStart = () => {
+	return {
+		type: UPDATE_STATE_START,
+	};
+};
+export const updateStateSuccess = (appliances) => {
+	return {
+		type: UPDATE_STATE_SUCCESS,
+		appliances,
+	};
+};
+export const updateStateFailure = (error) => {
+	return {
+		type: UPDATE_STATE_FAILURE,
+		error,
+	};
+};
+export const changeState = (obj) => {
+	return (dispatch) => {
+		dispatch(updateStateStart());
+		let url = API_URLS.changeState();
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+			body: formurlencoded(obj),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data.success) {
+					dispatch(updateStateSuccess(data.data.selected_appliances));
+				} else {
+					dispatch(updateStateFailure(data.message));
+				}
+			});
 	};
 };

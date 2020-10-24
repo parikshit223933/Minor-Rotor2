@@ -4,16 +4,7 @@ const Appliances = require('../models/Appliance');
 
 module.exports.AllData = async function (req, res) {
 	try {
-		// console.log(req.cookies);
-
 		let states = await States.find({})
-		// .sort('-createdAt')
-		// .populate({
-		// 	path: 'appliances',
-		// 	populate: {
-		// 		path: 'admin',
-		// 	},
-		// });
 		let appliances = await Appliances.find({})
 			.sort('-createdAt')
 			.populate('admin')
@@ -30,8 +21,6 @@ module.exports.AllData = async function (req, res) {
             path:'state',
             
         });
-		console.log('---------users--------',states)
-		// console.log('-----appliances---',appliances)
 		return res.render('data', {
 			title: 'Automation|DATA',
 			appliances: appliances,
