@@ -28,7 +28,8 @@ nav {
   color: #ffc662;
   font-weight: bold;
   font-size: 23px;
-  font-family: "Shadows Into Light", cursive; }
+  font-family: "Shadows Into Light", cursive;
+  z-index: 5; }
   nav div {
     padding: 10px 20px;
     transition: 0.5s all; }
@@ -49,8 +50,7 @@ nav {
   margin-bottom: 50px;
   position: relative;
   box-shadow: inset 0px 0px 10px black;
-  background-color: #fffaf1;
-  z-index: -1; }
+  background-color: #fffaf1; }
   .datacontainer table {
     width: 100%; }
     .datacontainer table tr:nth-child(2n+1) {

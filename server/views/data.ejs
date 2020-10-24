@@ -54,17 +54,28 @@
                             <div class="states">
                               <%if(mappings[appliance.name]){%>
                                 <div class="state">
-                                  <div class="s1"><span> Turned </span>
-                                    <!-- <%=mappings[appliance.name][0]%> -->
-                                    <%if(state[mappings[appliance.name][0]]){%>
-                                    <span style="color: green; font-weight: bold;" > ON </span>
-                                    <%}else{%>
+                                  <%for(var s = 0 ; s < mappings[appliance.name].length ; s++){%>
+                                    <%if(s==0){%>
+                                      <div class="s1">
+                                      <%if(state[mappings[appliance.name][s]]){%>
+                                      
+                                        <span> Turned </span>
+                                       <span style="color: green; font-weight: bold;" > ON </span>
+                                    <%}else if(!state[mappings[appliance.name][s]]){%>
+                                      <span> Turned </span>
                                       <span style="color: darkred; font-weight: bold;">OFF</span>
-                                      <%}%></div>
-                                 <div class="s2"><span><%=mappings[appliance.name][1]%>  </span> <span>
-                                   <%=state[mappings[appliance.name][1]]%>
-                                  </span></div>
-                                </div>
+                                   
+                                      <%}%>
+                                    </div>
+                                    <%}%>
+                                  <%if(s>0){%>
+                                    <div class="s2"><span><%=mappings[appliance.name][s]%>  </span> <span>
+                                      <%=state[mappings[appliance.name][s]]%>
+                                       </span></div>
+                                   
+                                    <%}%>
+                                <%}%>
+                              </div>
                                 <%}%>
                                   
                                 
