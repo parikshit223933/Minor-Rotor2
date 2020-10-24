@@ -1,16 +1,22 @@
 .home-component {
 	.intro-box {
-		box-shadow: 0px 0px 14px 0px #bfbfbf;
+		// box-shadow: 0px 0px 14px 0px #bfbfbf;
 		border-radius: 5px;
+	}
+	.bg-white{
+		background-color: #000000b5 !important ;
 	}
 }
 .site-logo {
 	font-family: 'Shadows Into Light', cursive;
 	letter-spacing: 10px;
-	color: #ff0093;
+	color: #ffde67;
 	font-weight: 900;
 }
 .form-control:focus {
-	border-color: #ff0093;
+	border-color: yellow;
 	box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.363);
+}
+.font-30{
+	color: white;
 }

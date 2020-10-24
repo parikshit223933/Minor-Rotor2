@@ -1,6 +1,6 @@
 import React from 'react';
 import './SelectAppliances.scss';
-import options from '../../assets/svgs/undraw_Preferences_re_49in.svg';
+import options from '../../assets/svgs/pref.svg';
 import { ButtonSpinner, ScreenSpinner } from '../';
 import { connect } from 'react-redux';
 import { selectAppliances } from '../../actions/auth';

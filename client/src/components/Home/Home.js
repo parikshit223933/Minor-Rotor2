@@ -1,6 +1,6 @@
 import React from 'react';
 import './home.scss';
-import bulb from '../../assets/svgs/undraw_lightbulb_moment_evxr.svg';
+import bulb from '../../assets/svgs/bulb.svg';
 import { Auth, SignIn, SignUp } from '../';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 class Home extends React.Component {
