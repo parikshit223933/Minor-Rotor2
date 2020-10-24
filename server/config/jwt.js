@@ -3,7 +3,8 @@ const passport = require('passport');
 const JWTStrategy = require('passport-jwt').Strategy;
 const extractJWT = require('passport-jwt').ExtractJwt;
 const User = require('../models/user');
-let passportJWTSecret = 'something';
+const env=require('../environment/environment');
+let passportJWTSecret = env.passportJWTSecret;
 
 passport.use(
 	new JWTStrategy(

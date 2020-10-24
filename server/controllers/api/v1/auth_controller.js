@@ -3,7 +3,8 @@ const User = require('../../../models/user');
 const chalk = require('chalk');
 const helper = require('../../../helpers/helper');
 const jwt = require('jsonwebtoken');
-let passportJWTSecret = 'something';
+const env=require('../../../environment/environment');
+let passportJWTSecret = env.passportJWTSecret;
 
 // req.body => {name, email, password, confirmPassword}
 module.exports.signUp = async (req, res) => {

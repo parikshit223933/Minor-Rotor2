@@ -9,8 +9,9 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
-const sessionName = 'something'; // to be changed at production
-const sessionSecret = 'something'; // to be changed at production
+const env=require('./environment/environment');
+const sessionName = env.sessionName; // to be changed at production
+const sessionSecret = env.sessionSecret; // to be changed at production
 
 app.use(cors()); // enable all
 app.use(express.static('./assets'));
