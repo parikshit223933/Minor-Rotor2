@@ -1,6 +1,16 @@
 .select-appliances {
 	.intro-box {
-		box-shadow: 0px 0px 14px 0px #bfbfbf;
+		// box-shadow: 0px 0px 14px 0px #bfbfbf;
 		border-radius: 5px;
 	}
+	.bg-white{
+		background-color: #000000b5 !important ;
+	}
+}
+.font-25{
+  color: #ffde67 !important;
+}
+label{
+	color: darkred;
+	font-weight: 500;
 }
