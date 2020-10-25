@@ -9,4 +9,4 @@ const production={
   sessionSecret:process.env.SESSION_SECRET
 }
 
-module.exports=development;
+module.exports=production;
